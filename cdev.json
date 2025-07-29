@@ -1,0 +1,28 @@
+{
+  "projectId": "6888db3d7ba1820cf5711e88",
+  "projectName": "myapp",
+  "techStack": "mern",
+  "createdAt": "2025-07-29T14:31:25.733Z",
+  "lastModified": "2025-07-29T14:32:57.025Z",
+  "cdevEditorCompatible": true,
+  "editorVersion": "1.0.0",
+  "workspaceSettings": {
+    "sidebarVisible": true,
+    "terminalVisible": false,
+    "searchPanelVisible": false,
+    "fontSize": 14,
+    "wordWrap": "on",
+    "minimap": true,
+    "lineNumbers": true,
+    "theme": "cdev-dark"
+  },
+  "fileExclusions": [
+    "node_modules/**",
+    ".git/**",
+    "*.log",
+    ".env"
+  ],
+  "lastEditorAccess": "2025-07-29T14:32:57.025Z",
+  "currentSession": "yufk72kvy",
+  "isOpenInEditor": true
+}
