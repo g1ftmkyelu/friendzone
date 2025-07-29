@@ -1,4 +1,4 @@
-# myapp
+# Connectify
 
 This project was generated using MERN stack generator and is optimized for CDevEditor.
 

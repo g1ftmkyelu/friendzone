@@ -44,7 +44,7 @@ body {
 /* Button styling */
 .button {
   display: inline-block; /* Equivalent to inline-block */
-  background-color: #3b82f6; /* Equivalent to bg-blue-500 */
+  background-color: #8B5CF6; /* Changed to purple-500 */
   color: #ffffff; /* Equivalent to text-white */
   font-weight: 700; /* Equivalent to font-bold */
   padding: 0.75rem 1.5rem; /* Equivalent to py-3 px-6 */
@@ -54,5 +54,5 @@ body {
 }
 
 .button:hover {
-  background-color: #2563eb; /* Equivalent to hover:bg-blue-600 */
+  background-color: #7C3AED; /* Changed to purple-600 */
 }
