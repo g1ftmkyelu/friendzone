@@ -3,7 +3,7 @@
   "projectName": "myapp",
   "techStack": "mern",
   "createdAt": "2025-07-29T14:31:25.733Z",
-  "lastModified": "2025-07-29T14:32:57.025Z",
+  "lastModified": "2025-07-29T14:54:01.925Z",
   "cdevEditorCompatible": true,
   "editorVersion": "1.0.0",
   "workspaceSettings": {
@@ -22,8 +22,8 @@
     "*.log",
     ".env"
   ],
-  "lastEditorAccess": "2025-07-29T14:32:57.025Z",
-  "currentSession": "yufk72kvy",
+  "lastEditorAccess": "2025-07-29T14:54:01.925Z",
+  "currentSession": "yp43jpb6h",
   "isOpenInEditor": true,
   "frontendPort": 3131
 }
