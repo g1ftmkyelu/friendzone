@@ -1,0 +1,143 @@
+/* Styles for Pages */
+
+.pages-header {
+  background-color: #4267B2; /* Facebook blue */
+  color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pages-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.pages-header nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.pages-header nav a:hover {
+  opacity: 0.8;
+}
+
+.pages-container {
+  padding: 2rem;
+  background-color: #f0f2f5; /* Light gray background, similar to Facebook */
+  min-height: calc(100vh - 70px); /* Adjust for header height */
+}
+
+.page-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1c1e21;
+  margin-bottom: 0.5rem;
+}
+
+.page-card p {
+  font-size: 0.95rem;
+  color: #606770;
+  margin-bottom: 1rem;
+  flex-grow: 1; /* Allows description to take available space */
+}
+
+.page-card .category {
+  font-size: 0.85rem;
+  color: #8a8d91;
+  margin-bottom: 0.5rem;
+}
+
+.page-card .likes {
+  font-size: 0.85rem;
+  color: #606770;
+  margin-bottom: 1rem;
+}
+
+.page-card .button {
+  background-color: #1877f2; /* Facebook blue for buttons */
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.375rem; /* Slightly less rounded than global button */
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.page-card .button:hover {
+  background-color: #166fe5;
+}
+
+.page-detail-card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.page-detail-card h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1c1e21;
+  margin-bottom: 1rem;
+}
+
+.page-detail-card .category {
+  font-size: 1rem;
+  color: #8a8d91;
+  margin-bottom: 0.5rem;
+}
+
+.page-detail-card .likes {
+  font-size: 1rem;
+  color: #606770;
+  margin-bottom: 1.5rem;
+}
+
+.page-detail-card .description {
+  font-size: 1.1rem;
+  color: #1c1e21;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.page-detail-card .back-button {
+  display: inline-block;
+  background-color: #606770;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.page-detail-card .back-button:hover {
+  background-color: #4b5563;
+}

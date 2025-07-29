@@ -1,0 +1,15 @@
+<div class="pages-container">
+  <h1 class="card-title" style="text-align: center; margin-bottom: 2rem;">Discover Pages</h1>
+
+  <div class="page-list">
+    <% @pages.each do |page| %>
+      <div class="page-card">
+        <h2><%= link_to page.name, page_path(page), class: "card-title" %></h2>
+        <p class="category"><%= page.category %></p>
+        <p><%= truncate(page.description, length: 100) %></p>
+        <p class="likes"><%= page.likes_count %> Likes</p>
+        <%= link_to "View Page", page_path(page), class: "button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

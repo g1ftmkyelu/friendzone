@@ -1,0 +1,10 @@
+<div class="pages-container">
+  <div class="page-detail-card">
+    <h1><%= @page.name %></h1>
+    <p class="category">Category: <%= @page.category %></p>
+    <p class="likes"><%= @page.likes_count %> Likes</p>
+    <p class="description"><%= @page.description %></p>
+
+    <%= link_to "Back to Pages", pages_path, class: "back-button" %>
+  </div>
+</div>

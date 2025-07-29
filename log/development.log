@@ -625,3 +625,17 @@ Started GET "/icon.png" for 127.0.0.1 at 2025-07-29 19:15:29 +0200
   
 ActionController::RoutingError (No route matches [GET] "/icon.png"):
   
+Started GET "/" for 127.0.0.1 at 2025-07-29 19:18:43 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.1ms | GC: 0.0ms)
+Completed 200 OK in 22ms (Views: 5.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/application-943da41e.css" for 127.0.0.1 at 2025-07-29 19:18:44 +0200
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-29 19:18:44 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  

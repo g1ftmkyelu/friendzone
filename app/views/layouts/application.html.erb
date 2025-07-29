@@ -19,9 +19,18 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "pages", "data-turbo-track": "reload" %>
   </head>
 
   <body>
+    <header class="pages-header">
+      <h1>Connectify</h1>
+      <nav>
+        <a href="<%= root_path %>">Home</a>
+        <a href="<%= pages_path %>">Pages</a>
+        <%# Add more navigation links here %>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
