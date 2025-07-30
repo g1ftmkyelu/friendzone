@@ -7,7 +7,7 @@
 .main-header {
   background-color: #2ecc71; /* Primary color */
   color: #ffffff;
-  padding: 0.5rem 60px; /* Scaled down padding */
+  padding: 0.5rem 20px; /* Adjusted padding to give more space on the right */
   display: flex;
   justify-content: space-between;
   align-items: center;
