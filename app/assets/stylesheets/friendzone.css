@@ -138,15 +138,16 @@
 /* Main content area */
 .main-layout-content {
   flex-grow: 1;
-  transition: margin-left 0.3s ease-in-out;
-  width: 100%;
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out; /* Added width to transition */
+  width: 100%; /* Default width */
   padding-top: 70px; /* Account for fixed header height */
   box-sizing: border-box; /* Include padding in width/height calculations */
 }
 
 /* When sidebar is open, shift main content */
 .app-container.sidebar-open .main-layout-content {
-  margin-left: 250px;
+  margin-left: 250px; /* Default for larger screens */
+  width: calc(100% - 250px); /* Default for larger screens */
 }
 
 /* Toggle button for sidebar */
@@ -178,10 +179,11 @@
 
   .app-container.sidebar-open .main-layout-content {
     margin-left: 200px;
+    width: calc(100% - 200px); /* Adjusted width for mobile when sidebar is open */
   }
 
-  /* Overlay for mobile when sidebar is open */
-  .app-container.sidebar-open .main-layout-content::before {
+  /* Removed overlay for mobile when sidebar is open, content now shifts */
+  /* .app-container.sidebar-open .main-layout-content::before {
     content: '';
     position: absolute;
     top: 0;
@@ -190,7 +192,7 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-  }
+  } */
 
   /* Hide main nav links on smaller screens, rely on sidebar */
   .main-header nav {
@@ -211,6 +213,7 @@
 
   .main-layout-content {
     margin-left: 250px; /* Always shifted */
+    width: calc(100% - 250px); /* Adjusted width for desktop */
   }
 
   .sidebar-toggle-button {
