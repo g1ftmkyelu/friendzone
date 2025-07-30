@@ -8,7 +8,9 @@ export default class extends Controller {
     this.element.classList.remove("open");
   }
 
-  toggle() {
+  toggle(event) {
+    // Stop the click event from propagating up to the window, which would trigger the hide action immediately.
+    event.stopPropagation();
     // Toggle the 'open' class on the parent element (data-controller="dropdown")
     this.element.classList.toggle("open");
   }
