@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   # Top-level route for friends list
   get '/friends', to: 'friendships#index', as: 'friends'
+  # Top-level route for friend requests page
+  get '/friend_requests', to: 'friendships#requests', as: 'friend_requests'
 
   resources :users, only: [:show, :create, :edit, :update] do
     member do
@@ -31,11 +33,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
-  resources :friendships, only: [:create, :update, :destroy] do
-    collection do
-      get :requests, as: :friend_requests # Custom route for friend requests page
-    end
-  end
+  resources :friendships, only: [:create, :update, :destroy]
+  # The collection route for friend requests was moved to a top-level route for clarity and direct access.
 
   resources :messages, only: [:index, :show, :create]
 

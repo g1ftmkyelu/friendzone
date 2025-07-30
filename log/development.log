@@ -2192,3 +2192,71 @@ Processing by SessionsController#new as */*
 Completed 200 OK in 39ms (Views: 27.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:48:15 +0200
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:48:15 +0200
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:48:15 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/"):
+  
+  
+ActionController::RoutingError (No route matches [HEAD] "/"):
+  
+Processing by HomeController#index as */*
+Redirected to http://localhost:3131/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 478ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 30.4ms)
+
+
+Started HEAD "/login" for 127.0.0.1 at 2025-07-30 04:48:16 +0200
+Processing by SessionsController#new as */*
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 21.8ms | GC: 0.8ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 56.0ms | GC: 2.5ms)
+Completed 200 OK in 122ms (Views: 64.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.5ms)
+
+
+Started HEAD "/login" for 127.0.0.1 at 2025-07-30 04:48:33 +0200
+Processing by SessionsController#new as */*
+Started GET "/login" for 127.0.0.1 at 2025-07-30 04:48:33 +0200
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 5.8ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | GC: 0.0ms)
+Completed 200 OK in 62ms (Views: 13.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 6.6ms | GC: 0.0ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='new',application='FriendZone',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendered shared/_navbar.html.erb (Duration: 172.6ms | GC: 26.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 185.8ms | GC: 26.6ms)
+Completed 500 Internal Server Error in 237ms (ActiveRecord: 7.6ms (1 query, 0 cached) | GC: 26.6ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007b2f6464e560>)
+Caused by: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007b2f6464e560>)
+
+Information for: ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007b2f6464e560>):
+     5:       <% if logged_in? %>
+     6:         <li><%= link_to "Home", root_path %></li>
+     7:         <li><%= link_to "Friends", friends_path %></li>
+     8:         <li><%= link_to "Requests", friend_requests_path %></li>
+     9:         <li><%= link_to "Messages", messages_path %></li>
+    10:         <li><%= link_to "Create Post", new_post_path %></li>
+    11:         <li>
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+
+Information for cause: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007b2f6464e560>):
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
