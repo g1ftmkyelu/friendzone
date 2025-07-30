@@ -1,31 +1,37 @@
-<div class="container">
-  <% if flash[:notice] %>
-    <div class="flash notice"><%= flash[:notice] %></div>
-  <% end %>
-  <% if flash[:alert] %>
-    <div class="flash alert"><%= flash[:alert] %></div>
-  <% end %>
+<% if flash[:notice] %>
+  <div class="flash notice"><%= flash[:notice] %></div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="flash alert"><%= flash[:alert] %></div>
+<% end %>
 
-  <div class="card">
-    <h1 class="card-title">Welcome to The FriendZone, <%= current_user.username %>!</h1>
-    <p class="card-paragraph">
-      Share your thoughts and connect with friends.
-    </p>
-  </div>
+<div class="home-page-grid">
+  <div class="feed-column">
+    <div class="card">
+      <h1 class="card-title">Welcome to The FriendZone, <%= current_user.username %>!</h1>
+      <p class="card-paragraph">
+        Share your thoughts and connect with friends.
+      </p>
+    </div>
 
-  <div class="card">
-    <h2 class="card-title" style="text-align: left; margin-bottom: 20px;">Create New Post</h2>
-    <%= render 'posts/form', post: @post %>
-  </div>
+    <div class="card">
+      <h2 class="card-title" style="text-align: left; margin-bottom: 20px;">Create New Post</h2>
+      <%= render 'posts/form', post: @post %>
+    </div>
 
-  <h2 class="card-title" style="text-align: left; margin-top: 40px; margin-bottom: 20px;">News Feed</h2>
-  <div class="news-feed">
-    <% if @posts.any? %>
-      <% @posts.each do |post| %>
-        <%= render 'posts/post', post: post %>
+    <h2 class="card-title" style="text-align: left; margin-top: 40px; margin-bottom: 20px;">News Feed</h2>
+    <div class="news-feed">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/post', post: post %>
+        <% end %>
+      <% else %>
+        <p class="card-paragraph">No posts yet. Start by creating one!</p>
       <% end %>
-    <% else %>
-      <p class="card-paragraph">No posts yet. Start by creating one!</p>
-    <% end %>
+    </div>
+  </div>
+
+  <div class="recommendation-column">
+    <%= render 'home/recommendation_panel', recommended_users: @recommended_users %>
   </div>
 </div>

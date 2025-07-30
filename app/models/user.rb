@@ -50,4 +50,18 @@ class User < ApplicationRecord
   def self.search_by_query(query)
     where("username LIKE ? OR name LIKE ?", "%#{query}%", "%#{query}%")
   end
+
+  # Instance method to get recommended users (not friends, not pending, not self)
+  def recommended_users(limit: 5)
+    # Get IDs of current user, accepted friends, and users with pending requests (both ways)
+    excluded_ids = [self.id] +
+                   self.all_friends.pluck(:id) +
+                   self.friendships.where(status: 'pending').pluck(:friend_id) +
+                   self.inverse_friendships.where(status: 'pending').pluck(:user_id)
+
+    # Find users not in the excluded_ids list, order randomly, and limit
+    User.where.not(id: excluded_ids.uniq)
+        .order(Arel.sql('RANDOM()')) # RANDOM() for SQLite
+        .limit(limit)
+  end
 end

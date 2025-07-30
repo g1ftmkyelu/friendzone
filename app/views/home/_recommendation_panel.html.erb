@@ -1,0 +1,30 @@
+<div class="recommendation-panel card">
+  <h2 class="card-title" style="text-align: left; margin-bottom: 20px;">Who to Follow</h2>
+  <% if recommended_users.any? %>
+    <div class="recommended-users-list">
+      <% recommended_users.each do |user| %>
+        <div class="recommended-user-item">
+          <%= image_tag user.avatar, alt: user.username, class: "avatar" %>
+          <div class="user-info">
+            <%= link_to user.username, user_path(user), class: "username" %>
+            <small><%= user.name %></small>
+          </div>
+          <div class="user-actions">
+            <% friendship_status = current_user.friendship_status_with(user) %>
+            <% if friendship_status == 'not_friends' %>
+              <%= button_to '<i class="fa-solid fa-user-plus"></i> Add Friend'.html_safe, friendships_path(friend_id: user.id), method: :post, class: "button button-small" %>
+            <% elsif friendship_status == 'pending_outgoing' %>
+              <span class="button button-secondary button-small"><i class="fa-solid fa-hourglass-half"></i> Pending</span>
+            <% elsif friendship_status == 'pending_incoming' %>
+              <%= button_to '<i class="fa-solid fa-check"></i> Accept'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: user)), method: :patch, class: "button button-small" %>
+            <% elsif friendship_status == 'friends' %>
+              <span class="button button-secondary button-small"><i class="fa-solid fa-user-group"></i> Friends</span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="card-paragraph">No new users to recommend at the moment.</p>
+  <% end %>
+</div>
