@@ -9,7 +9,31 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  resources :pages, only: [:index, :show]
+  # User authentication routes
+  get '/signup', to: 'users#new', as: 'signup'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  resources :users, only: [:show, :create, :edit, :update] do
+    member do
+      get :friends
+      get :friend_requests
+    end
+  end
+
+  resources :posts do
+    resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
+  end
+
+  resources :friendships, only: [:create, :update, :destroy] do
+    collection do
+      get :requests # Custom route for friend requests page
+    end
+  end
+
+  resources :messages, only: [:index, :show, :create]
 
   # Defines the root path route ("/")
   root "home#index"

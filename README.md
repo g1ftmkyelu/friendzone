@@ -1,6 +1,6 @@
-# Connectify
+# FriendZone
 
-This project was generated using MERN stack generator and is optimized for CDevEditor.
+This project is a social networking platform named "FriendZone", resembling Facebook in core functionality but with a distinct Emerald Green color scheme. It uses vanilla CSS for styling and is built with Ruby on Rails.
 
 ## Project Structure
 
@@ -30,7 +30,7 @@ This project is fully compatible with CDevEditor, featuring:
 
 ## Generated Files
 
-The project includes all necessary files for a complete MERN stack application.
+The project includes all necessary files for a complete Rails application.
 
 Generated on: 2025-07-29T14:31:25.969Z
 Last opened in CDevEditor: Never

@@ -639,3 +639,180 @@ Started GET "/icon.png" for 127.0.0.1 at 2025-07-29 19:18:44 +0200
   
 ActionController::RoutingError (No route matches [GET] "/icon.png"):
   
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-07-29 17:24:04.354109', '2025-07-29 17:24:04.354116') RETURNING "key" /*application='Connectify'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Connectify'*/[0m
+Migrating to CreatePages (20250729170000)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "pages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "description" text, "category" varchar, "likes_count" integer DEFAULT 0, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Connectify'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_pages_on_name" ON "pages" ("name") /*application='Connectify'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250729170000') RETURNING "version" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Connectify'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Connectify'*/[0m
+  [1m[36mPage Load (0.2ms)[0m  [1m[34mSELECT "pages".* FROM "pages" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Connectify Official Page' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.4ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Connectify Official Page', 'The official page for Connectify, your new social network!', 'Community', 1500, '2025-07-29 17:24:15.665251', '2025-07-29 17:24:15.665251') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (4.4ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Local Coffee Shop' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.2ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Local Coffee Shop', 'Your favorite spot for artisanal coffee and pastries.', 'Business', 850, '2025-07-29 17:24:15.717947', '2025-07-29 17:24:15.717947') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (3.8ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Rails Developers Group' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.2ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Rails Developers Group', 'A community for Ruby on Rails developers to share knowledge and collaborate.', 'Community', 2100, '2025-07-29 17:24:15.746557', '2025-07-29 17:24:15.746557') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (9.1ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Healthy Living Tips' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.7ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Healthy Living Tips', 'Daily tips and advice for a healthier and happier life.', 'Health & Wellness', 1200, '2025-07-29 17:24:15.780434', '2025-07-29 17:24:15.780434') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (18.8ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Tech Innovations 2025' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.2ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Tech Innovations 2025', 'Stay updated with the latest breakthroughs in technology.', 'Technology', 980, '2025-07-29 17:24:15.845634', '2025-07-29 17:24:15.845634') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Global Travel Adventures' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.3ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Global Travel Adventures', 'Explore the world with us! Sharing breathtaking destinations and travel guides.', 'Travel', 3200, '2025-07-29 17:24:15.867285', '2025-07-29 17:24:15.867285') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "pages" WHERE "pages"."name" = 'Art & Design Showcase' LIMIT 1 /*application='Connectify'*/[0m
+  [1m[36mPage Create (0.3ms)[0m  [1m[32mINSERT INTO "pages" ("name", "description", "category", "likes_count", "created_at", "updated_at") VALUES ('Art & Design Showcase', 'A platform for artists and designers to showcase their creative works.', 'Arts', 700, '2025-07-29 17:24:15.877639', '2025-07-29 17:24:15.877639') RETURNING "id" /*application='Connectify'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Connectify'*/[0m
+  [1m[36mPage Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "pages" /*application='Connectify'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-07-29 19:24:26 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Connectify'*/[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.4ms | GC: 0.0ms)
+Completed 200 OK in 53ms (Views: 20.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/assets/pages-d5e19b9d.css" for 127.0.0.1 at 2025-07-29 19:24:27 +0200
+Started GET "/pages" for 127.0.0.1 at 2025-07-29 19:24:31 +0200
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.4ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY "pages"."likes_count" DESC /*action='index',application='Connectify',controller='pages'*/[0m
+  ↳ app/views/pages/index.html.erb:5
+  Rendered pages/index.html.erb within layouts/application (Duration: 32.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 37.5ms | GC: 0.0ms)
+Completed 200 OK in 63ms (Views: 36.7ms | ActiveRecord: 4.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/pages/3" for 127.0.0.1 at 2025-07-29 19:24:38 +0200
+Processing by PagesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPage Load (4.6ms)[0m  [1m[34mSELECT "pages".* FROM "pages" WHERE "pages"."id" = 3 LIMIT 1 /*action='show',application='Connectify',controller='pages'*/[0m
+  ↳ app/controllers/pages_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/show.html.erb within layouts/application
+  Rendered pages/show.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | GC: 0.0ms)
+Completed 200 OK in 30ms (Views: 8.8ms | ActiveRecord: 4.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/pages" for 127.0.0.1 at 2025-07-29 19:24:40 +0200
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.9ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY "pages"."likes_count" DESC /*action='index',application='Connectify',controller='pages'*/[0m
+  ↳ app/views/pages/index.html.erb:5
+  Rendered pages/index.html.erb within layouts/application (Duration: 11.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.8ms | GC: 0.0ms)
+Completed 200 OK in 27ms (Views: 14.8ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-07-29 19:24:42 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | GC: 0.0ms)
+Completed 200 OK in 18ms (Views: 9.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-07-29 19:27:16 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 4.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/pages" for 127.0.0.1 at 2025-07-29 19:27:17 +0200
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (0.2ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY "pages"."likes_count" DESC /*action='index',application='Connectify',controller='pages'*/[0m
+  ↳ app/views/pages/index.html.erb:5
+  Rendered pages/index.html.erb within layouts/application (Duration: 8.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 10.8ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-29 19:27:17 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started GET "/pages" for 127.0.0.1 at 2025-07-29 19:38:10 +0200
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mPage Load (4.0ms)[0m  [1m[34mSELECT "pages".* FROM "pages" ORDER BY "pages"."likes_count" DESC /*action='index',application='Connectify',controller='pages'*/[0m
+  ↳ app/views/pages/index.html.erb:5
+  Rendered pages/index.html.erb within layouts/application (Duration: 7.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | GC: 0.0ms)
+Completed 200 OK in 25ms (Views: 9.7ms | ActiveRecord: 4.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-07-29 19:41:31 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 11.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:14:01 +0200
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:14:01 +0200
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:14:01 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Connectify'*/[0m
+  
+ActionController::RoutingError (No route matches [HEAD] "/"):
+  
+  
+ActionController::RoutingError (No route matches [HEAD] "/"):
+  
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 3.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 24.3ms | GC: 0.0ms)
+Completed 200 OK in 363ms (Views: 28.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 19.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:14:06 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.4ms | GC: 0.0ms)
+Completed 200 OK in 29ms (Views: 13.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/application-943da41e.css" for 127.0.0.1 at 2025-07-30 04:14:06 +0200
+Started GET "/assets/pages-d5e19b9d.css" for 127.0.0.1 at 2025-07-30 04:14:06 +0200
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:14:10 +0200
+Processing by HomeController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | GC: 0.0ms)
+Completed 200 OK in 18ms (Views: 4.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+

@@ -1,11 +1,31 @@
 <div class="container">
+  <% if flash[:notice] %>
+    <div class="flash notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="flash alert"><%= flash[:alert] %></div>
+  <% end %>
+
   <div class="card">
-    <h1 class="card-title">Welcome to Connectify!</h1>
+    <h1 class="card-title">Welcome to FriendZone, <%= current_user.username %>!</h1>
     <p class="card-paragraph">
-      This is your new landing page, styled with vanilla CSS.
+      Share your thoughts and connect with friends.
     </p>
-    <a href="<%= pages_path %>" class="button">
-      View Pages
-    </a>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title" style="text-align: left; margin-bottom: 20px;">Create New Post</h2>
+    <%= render 'posts/form', post: @post %>
+  </div>
+
+  <h2 class="card-title" style="text-align: left; margin-top: 40px; margin-bottom: 20px;">News Feed</h2>
+  <div class="news-feed">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    <% else %>
+      <p class="card-paragraph">No posts yet. Start by creating one!</p>
+    <% end %>
   </div>
 </div>

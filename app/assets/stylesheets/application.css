@@ -1,58 +1,164 @@
 /* General Body Styles */
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f4f4; /* Background color */
+  color: #333333; /* Text color */
+  line-height: 1.6;
 }
 
-/* Container for the main content */
+/* Global Container for the main content */
 .container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f3f4f6; /* Equivalent to bg-gray-100 */
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 0 20px;
 }
 
 /* Card styling */
 .card {
-  background-color: #ffffff; /* Equivalent to bg-white */
-  padding: 2rem; /* Equivalent to p-8 */
-  border-radius: 0.5rem; /* Equivalent to rounded-lg */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Equivalent to shadow-lg */
-  text-align: center; /* Equivalent to text-center */
-  max-width: 28rem; /* Equivalent to max-w-md */
-  width: 100%; /* Equivalent to w-full */
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 /* Card title styling */
 .card-title {
-  font-size: 2.25rem; /* Equivalent to text-4xl */
-  font-weight: 700; /* Equivalent to font-bold */
-  color: #1f2937; /* Equivalent to text-gray-800 */
-  margin-bottom: 1rem; /* Equivalent to mb-4 */
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 /* Card paragraph styling */
 .card-paragraph {
-  font-size: 1.125rem; /* Equivalent to text-lg */
-  color: #4b5563; /* Equivalent to text-gray-600 */
-  margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+  font-size: 1.1rem;
+  color: #555555;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 /* Button styling */
 .button {
-  display: inline-block; /* Equivalent to inline-block */
-  background-color: #8B5CF6; /* Changed to purple-500 */
-  color: #ffffff; /* Equivalent to text-white */
-  font-weight: 700; /* Equivalent to font-bold */
-  padding: 0.75rem 1.5rem; /* Equivalent to py-3 px-6 */
-  border-radius: 9999px; /* Equivalent to rounded-full */
-  transition: background-color 0.3s ease-in-out; /* Equivalent to transition duration-300 ease-in-out */
-  text-decoration: none; /* Remove underline from link */
+  display: inline-block;
+  background-color: #2ecc71; /* Primary color */
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .button:hover {
-  background-color: #7C3AED; /* Changed to purple-600 */
+  background-color: #16a085; /* Accent color */
+}
+
+.button-secondary {
+  background-color: #cccccc;
+  color: #333333;
+}
+
+.button-secondary:hover {
+  background-color: #bbbbbb;
+}
+
+.button-danger {
+  background-color: #e74c3c;
+}
+
+.button-danger:hover {
+  background-color: #c0392b;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Flash messages */
+.flash {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.flash.notice {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.flash.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.8rem;
+  }
+
+  .card-paragraph {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
 }

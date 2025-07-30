@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="card-title">My Messages</h1>
+
+  <div class="messages-layout">
+    <div class="conversations-list">
+      <h2>Conversations</h2>
+      <% if @conversation_users.any? %>
+        <% @conversation_users.each do |user| %>
+          <%= link_to message_path(user), class: "conversation-item" do %>
+            <%= image_tag user.avatar, alt: user.username, class: "avatar" %>
+            <span class="username"><%= user.username %></span>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>No conversations yet.</p>
+      <% end %>
+    </div>
+
+    <div class="message-detail">
+      <p class="card-paragraph">Select a conversation to view messages.</p>
+    </div>
+  </div>
+</div>

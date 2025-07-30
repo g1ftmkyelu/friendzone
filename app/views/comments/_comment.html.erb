@@ -1,0 +1,13 @@
+<div class="comment-item">
+  <%= image_tag comment.user.avatar, alt: comment.user.username, class: "avatar" %>
+  <div class="comment-content-wrapper">
+    <p>
+      <%= link_to comment.user.username, user_path(comment.user), class: "username" %>
+      <span class="content"><%= comment.content %></span>
+    </p>
+    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+    <% if comment.user == current_user %>
+      <%= button_to "Delete", post_comment_path(comment.post, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger button-small" %>
+    <% end %>
+  </div>
+</div>

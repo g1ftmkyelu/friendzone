@@ -1,0 +1,43 @@
+<div class="container">
+  <h1 class="card-title">Friend Requests</h1>
+
+  <div class="card">
+    <h2>Incoming Requests</h2>
+    <% if @incoming_requests.any? %>
+      <div class="friend-requests-list">
+        <% @incoming_requests.each do |friendship| %>
+          <div class="friend-card">
+            <%= image_tag friendship.user.avatar, alt: friendship.user.username, class: "avatar" %>
+            <%= link_to friendship.user.username, user_path(friendship.user), class: "username" %>
+            <div class="friend-actions">
+              <%= button_to "Accept", friendship_path(friendship), method: :patch, class: "button" %>
+              <%= button_to "Decline", friendship_path(friendship), method: :delete, data: { confirm: "Are you sure you want to decline this request?" }, class: "button button-danger" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="card-paragraph">No incoming friend requests.</p>
+    <% end %>
+  </div>
+
+  <div class="card">
+    <h2>Outgoing Requests</h2>
+    <% if @outgoing_requests.any? %>
+      <div class="friend-requests-list">
+        <% @outgoing_requests.each do |friendship| %>
+          <div class="friend-card">
+            <%= image_tag friendship.friend.avatar, alt: friendship.friend.username, class: "avatar" %>
+            <%= link_to friendship.friend.username, user_path(friendship.friend), class: "username" %>
+            <div class="friend-actions">
+              <span class="button button-secondary">Pending</span>
+              <%= button_to "Cancel Request", friendship_path(friendship), method: :delete, data: { confirm: "Are you sure you want to cancel this request?" }, class: "button button-danger" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="card-paragraph">No outgoing friend requests.</p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="card-title">Messages with <%= @conversation_user.username %></h1>
+
+  <div class="messages-layout">
+    <div class="conversations-list">
+      <h2>Conversations</h2>
+      <% if @conversation_users.any? %>
+        <% @conversation_users.each do |user| %>
+          <%= link_to message_path(user), class: "conversation-item #{'active' if user == @conversation_user}" do %>
+            <%= image_tag user.avatar, alt: user.username, class: "avatar" %>
+            <span class="username"><%= user.username %></span>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>No conversations yet.</p>
+      <% end %>
+    </div>
+
+    <div class="message-detail">
+      <h2 class="message-header">Conversation with <%= @conversation_user.username %></h2>
+      <div class="message-list">
+        <% if @messages.any? %>
+          <% @messages.each do |message| %>
+            <%= render 'messages/message', message: message %>
+          <% end %>
+        <% else %>
+          <p class="card-paragraph">No messages in this conversation yet.</p>
+        <% end %>
+      </div>
+
+      <div class="new-message-form">
+        <%= form_with model: [@message], url: messages_path(@conversation_user), method: :post, local: true do |form| %>
+          <%= form.text_area :content, placeholder: "Type your message...", rows: 1 %>
+          <%= form.submit "Send", class: "button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

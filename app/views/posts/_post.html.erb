@@ -1,0 +1,36 @@
+<div class="post-card">
+  <div class="post-header">
+    <%= image_tag post.user.avatar, alt: post.user.username, class: "avatar" %>
+    <div>
+      <%= link_to post.user.username, user_path(post.user), class: "username" %>
+      <br>
+      <small><%= time_ago_in_words(post.created_at) %> ago</small>
+    </div>
+  </div>
+
+  <div class="post-content">
+    <% if post.content.present? %>
+      <p><%= post.content %></p>
+    <% end %>
+    <% if post.image_url.present? %>
+      <%= image_tag post.image_url, alt: "Post image" %>
+    <% end %>
+  </div>
+
+  <div class="post-actions">
+    <% if logged_in? %>
+      <% if post.likes.exists?(user: current_user) %>
+        <%= button_to "Unlike (#{post.likes.count})", post_like_path(post, post.likes.find_by(user: current_user)), method: :delete, class: "action-button liked" %>
+      <% else %>
+        <%= button_to "Like (#{post.likes.count})", post_likes_path(post), method: :post, class: "action-button" %>
+      <% end %>
+    <% else %>
+      <span class="action-button">Likes (<%= post.likes.count %>)</span>
+    <% end %>
+    <%= link_to "Comments (#{post.comments.count})", post_path(post), class: "action-button" %>
+    <% if logged_in? && post.user == current_user %>
+      <%= link_to "Edit", edit_post_path(post), class: "action-button button-secondary" %>
+      <%= button_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" }, class: "action-button button-danger" %>
+    <% end %>
+  </div>
+</div>

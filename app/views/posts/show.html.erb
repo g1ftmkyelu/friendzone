@@ -1,0 +1,38 @@
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="flash notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="flash alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= render 'post', post: @post %>
+
+  <div class="card post-detail-comments">
+    <h3>Comments (<%= @comments.count %>)</h3>
+    <div class="comment-list">
+      <% if @comments.any? %>
+        <% @comments.each do |comment| %>
+          <%= render 'comments/comment', comment: comment %>
+        <% end %>
+      <% else %>
+        <p>No comments yet. Be the first to comment!</p>
+      <% end %>
+    </div>
+
+    <% if logged_in? %>
+      <div class="new-comment-form">
+        <%= form_with model: [@post, @comment], local: true do |form| %>
+          <div class="form-group">
+            <%= form.text_area :content, placeholder: "Write a comment...", rows: 2 %>
+          </div>
+          <div class="form-actions">
+            <%= form.submit "Add Comment", class: "button" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="card-paragraph">Please <%= link_to "log in", login_path %> to add a comment.</p>
+    <% end %>
+  </div>
+</div>

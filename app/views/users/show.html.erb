@@ -1,0 +1,53 @@
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="flash notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="flash alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <div class="profile-header">
+    <%= image_tag @user.avatar, alt: @user.username, class: "profile-avatar" %>
+    <h1 class="profile-username"><%= @user.username %></h1>
+    <p class="profile-name"><%= @user.name %></p>
+    <% if @user.bio.present? %>
+      <p class="profile-bio"><%= @user.bio %></p>
+    <% end %>
+
+    <% if logged_in? && current_user != @user %>
+      <div class="profile-actions">
+        <% if @friendship_status == 'not_friends' %>
+          <%= button_to "Add Friend", friendships_path(friend_id: @user.id), method: :post, class: "button" %>
+        <% elsif @friendship_status == 'pending_outgoing' %>
+          <span class="button button-secondary">Friend Request Sent</span>
+          <%= button_to "Cancel Request", friendship_path(current_user.friendships.find_by(friend: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+        <% elsif @friendship_status == 'pending_incoming' %>
+          <%= button_to "Accept Request", friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :patch, class: "button" %>
+          <%= button_to "Decline Request", friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+        <% elsif @friendship_status == 'friends' %>
+          <span class="button button-secondary">Friends</span>
+          <%= button_to "Remove Friend", friendship_path(current_user.friendships.find_by(friend: @user) || current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+        <% end %>
+        <%= link_to "Message", message_path(@user), class: "button" %>
+      </div>
+    <% elsif logged_in? && current_user == @user %>
+      <div class="profile-actions">
+        <%= link_to "Edit Profile", edit_user_path(@user), class: "button" %>
+        <%= link_to "My Friends", friends_path, class: "button button-secondary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="profile-posts-section">
+    <h2><%= @user.username %>'s Posts</h2>
+    <div class="news-feed">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <%= render 'posts/post', post: post %>
+        <% end %>
+      <% else %>
+        <p class="card-paragraph"><%= @user.username %> hasn't posted anything yet.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
