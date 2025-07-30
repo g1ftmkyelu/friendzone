@@ -273,9 +273,10 @@
 
 @media (min-width: 1024px) { /* Adjust breakpoint as needed for two columns */
   .home-page-grid {
-    grid-template-columns: minmax(400px, 600px) 280px; /* Feed column (flexible, max 600px) and fixed 280px panel */
+    grid-template-columns: minmax(400px, 600px) 350px; /* Feed column (flexible, max 600px) and fixed 350px panel */
     justify-content: center; /* Center the grid content */
     align-items: start; /* Align items to the top */
+    max-width: 1300px; /* Increased max-width to reduce right margin */
   }
 }
 

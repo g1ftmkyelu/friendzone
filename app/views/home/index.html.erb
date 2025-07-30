@@ -8,13 +8,6 @@
 <div class="home-page-grid">
   <div class="feed-column">
     <div class="card">
-      <h1 class="card-title">Welcome to The FriendZone, <%= current_user.username %>!</h1>
-      <p class="card-paragraph">
-        Share your thoughts and connect with friends.
-      </p>
-    </div>
-
-    <div class="card">
       <h2 class="card-title" style="text-align: left; margin-bottom: 20px;">Create New Post</h2>
       <%= render 'posts/form', post: @post %>
     </div>
