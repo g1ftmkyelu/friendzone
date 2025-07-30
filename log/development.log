@@ -816,3 +816,1379 @@ Processing by HomeController#index as */*
 Completed 200 OK in 18ms (Views: 4.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Migrating to CreateUsers (20240730000000)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "email" varchar NOT NULL, "username" varchar NOT NULL, "bio" text, "avatar" varchar, "password_digest" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='FriendZone'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email") /*application='FriendZone'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_username" ON "users" ("username") /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240730000000') RETURNING "version" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+Migrating to CreatePosts (20240730000001)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[35m (11.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "image_url" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_5b5ddfd518"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='FriendZone'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_posts_on_user_id" ON "posts" ("user_id") /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240730000001') RETURNING "version" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+Migrating to CreateComments (20240730000002)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL, "user_id" integer NOT NULL, "post_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+) /*application='FriendZone'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_comments_on_user_id" ON "comments" ("user_id") /*application='FriendZone'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_post_id" ON "comments" ("post_id") /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240730000002') RETURNING "version" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+Migrating to CreateLikes (20240730000003)
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "post_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_1e09b5dabf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_87a8aac469"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+) /*application='FriendZone'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_likes_on_user_id" ON "likes" ("user_id") /*application='FriendZone'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_likes_on_post_id" ON "likes" ("post_id") /*application='FriendZone'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_likes_on_user_id_and_post_id" ON "likes" ("user_id", "post_id") /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240730000003') RETURNING "version" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+Migrating to CreateFriendships (20240730000004)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "friend_id" integer NOT NULL, "status" varchar DEFAULT 'pending' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_d78dc9c7fd"
+FOREIGN KEY ("friend_id")
+  REFERENCES "users" ("id")
+) /*application='FriendZone'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_user_id" ON "friendships" ("user_id") /*application='FriendZone'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id") /*application='FriendZone'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_friendships_on_user_id_and_friend_id" ON "friendships" ("user_id", "friend_id") /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240730000004') RETURNING "version" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+Migrating to CreateMessages (20240730000005)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "sender_id" integer NOT NULL, "receiver_id" integer NOT NULL, "content" text NOT NULL, "read_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_b8f26a382d"
+FOREIGN KEY ("sender_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_67c67d2963"
+FOREIGN KEY ("receiver_id")
+  REFERENCES "users" ("id")
+) /*application='FriendZone'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_messages_on_sender_id" ON "messages" ("sender_id") /*application='FriendZone'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_messages_on_receiver_id" ON "messages" ("receiver_id") /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240730000005') RETURNING "version" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" /*application='FriendZone'*/[0m
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" /*application='FriendZone'*/[0m
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" /*application='FriendZone'*/[0m
+  [1m[36mLike Load (0.6ms)[0m  [1m[34mSELECT "likes".* FROM "likes" /*application='FriendZone'*/[0m
+  [1m[36mFriendship Load (1.2ms)[0m  [1m[34mSELECT "friendships".* FROM "friendships" /*application='FriendZone'*/[0m
+  [1m[36mMessage Load (0.5ms)[0m  [1m[34mSELECT "messages".* FROM "messages" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (5.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user1@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 1', 'user1@friendzone.com', 'user1', 'Hello, I am User 1. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=1', '$2a$12$Kp3Y9QbQtySV3Bo1tZC9oOGh/Jzv13HEQjH76RnUyh.amH0xYdGCW', '2025-07-30 02:38:14.787269', '2025-07-30 02:38:14.787269') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user2@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 2', 'user2@friendzone.com', 'user2', 'Hello, I am User 2. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=2', '$2a$12$CZmicGsFE8e6QMqKyuFWSe2DSO.pmbAV0GtMf/zdzBUoU0N55d5I.', '2025-07-30 02:38:15.228336', '2025-07-30 02:38:15.228336') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user3@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user3' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 3', 'user3@friendzone.com', 'user3', 'Hello, I am User 3. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=3', '$2a$12$dhyEvgv4uJkwLs2WD3FjmO1uEG4shheRDCxVqA81rRcCBt0Eoxo2q', '2025-07-30 02:38:15.650755', '2025-07-30 02:38:15.650755') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user4@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user4' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 4', 'user4@friendzone.com', 'user4', 'Hello, I am User 4. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=4', '$2a$12$gtrIjwwUp3T8r41wby5aueAOYEtZlHsxqodDiu6jqhBDXdYkxa/hK', '2025-07-30 02:38:16.090474', '2025-07-30 02:38:16.090474') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user5@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user5' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 5', 'user5@friendzone.com', 'user5', 'Hello, I am User 5. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=5', '$2a$12$OzwaVcYPFNcioFTQlX6XaeVhERjUJnHXwJM8ClamLWEYQbhTQHs0q', '2025-07-30 02:38:16.535043', '2025-07-30 02:38:16.535043') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user6@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user6' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 6', 'user6@friendzone.com', 'user6', 'Hello, I am User 6. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=6', '$2a$12$bOYPIxGUibzDadAhjPYrkO.1aebWisRbWgYbQ6KIJMEt5c5f1z.RW', '2025-07-30 02:38:16.952269', '2025-07-30 02:38:16.952269') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user7@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user7' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 7', 'user7@friendzone.com', 'user7', 'Hello, I am User 7. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=7', '$2a$12$WuJSLcM.wU4JKUf9zOSMA.M9WlSHU2fJ9ZsHxw35GBEkl/1ekfAzS', '2025-07-30 02:38:17.364155', '2025-07-30 02:38:17.364155') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (3.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user8@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user8' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 8', 'user8@friendzone.com', 'user8', 'Hello, I am User 8. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=8', '$2a$12$MpY6qtIdrL8WdtPTWoSG4u1UMbk0Z3uzzfJqf/KmqbqcJcizvHQJe', '2025-07-30 02:38:17.779210', '2025-07-30 02:38:17.779210') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user9@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user9' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 9', 'user9@friendzone.com', 'user9', 'Hello, I am User 9. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=9', '$2a$12$KdbHB.WZ6ztOhFTkI49y.eUnnsQKdPhQQFA6fgAOqDad7bc3i4HLi', '2025-07-30 02:38:18.196399', '2025-07-30 02:38:18.196399') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user10@friendzone.com' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'user10' LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('User 10', 'user10@friendzone.com', 'user10', 'Hello, I am User 10. Connecting with friends on FriendZone!', 'https://i.pravatar.cc/150?img=10', '$2a$12$6jcN2Gj4L.pX/hhDio6WVe6.qGBEEdzIZWvqtW.63ebjOwxeX7U46', '2025-07-30 02:38:18.607580', '2025-07-30 02:38:18.607580') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (21.3ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/241/600/400', 2, '2025-07-30 02:38:18.680710', '2025-07-30 02:38:18.680710') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.3ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 2', 'https://picsum.photos/seed/72/600/400', 10, '2025-07-30 02:38:18.714788', '2025-07-30 02:38:18.714788') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.7ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('This is post number 3 from user8. Just sharing some thoughts!', NULL, 8, '2025-07-30 02:38:18.728503', '2025-07-30 02:38:18.728503') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (3.7ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/53/600/400', 1, '2025-07-30 02:38:18.740034', '2025-07-30 02:38:18.740034') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (3.0ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 5', 'https://picsum.photos/seed/973/600/400', 9, '2025-07-30 02:38:18.753486', '2025-07-30 02:38:18.753486') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.2ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('This is post number 6 from user9. Just sharing some thoughts!', NULL, 9, '2025-07-30 02:38:18.776433', '2025-07-30 02:38:18.776433') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.4ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/187/600/400', 3, '2025-07-30 02:38:18.788524', '2025-07-30 02:38:18.788524') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (1.8ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 8', 'https://picsum.photos/seed/556/600/400', 1, '2025-07-30 02:38:18.797623', '2025-07-30 02:38:18.797623') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (1.6ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('This is post number 9 from user10. Just sharing some thoughts!', NULL, 10, '2025-07-30 02:38:18.805678', '2025-07-30 02:38:18.805678') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.8ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/777/600/400', 4, '2025-07-30 02:38:18.813046', '2025-07-30 02:38:18.813046') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (3.5ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 11', 'https://picsum.photos/seed/796/600/400', 10, '2025-07-30 02:38:18.827373', '2025-07-30 02:38:18.827373') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (3.0ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('This is post number 12 from user1. Just sharing some thoughts!', NULL, 1, '2025-07-30 02:38:18.836645', '2025-07-30 02:38:18.836645') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (23.2ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/166/600/400', 1, '2025-07-30 02:38:18.844758', '2025-07-30 02:38:18.844758') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.1ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 14', 'https://picsum.photos/seed/719/600/400', 2, '2025-07-30 02:38:18.875724', '2025-07-30 02:38:18.875724') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (1.5ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('This is post number 15 from user7. Just sharing some thoughts!', NULL, 7, '2025-07-30 02:38:18.885703', '2025-07-30 02:38:18.885703') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (3.5ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/333/600/400', 5, '2025-07-30 02:38:18.894759', '2025-07-30 02:38:18.894759') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (3.7ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 17', 'https://picsum.photos/seed/954/600/400', 4, '2025-07-30 02:38:18.904754', '2025-07-30 02:38:18.904754') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (2.7ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('This is post number 18 from user7. Just sharing some thoughts!', NULL, 7, '2025-07-30 02:38:18.918229', '2025-07-30 02:38:18.918229') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (1.7ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES (NULL, 'https://picsum.photos/seed/708/600/400', 3, '2025-07-30 02:38:18.926751', '2025-07-30 02:38:18.926751') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mPost Create (8.0ms)[0m  [1m[32mINSERT INTO "posts" ("content", "image_url", "user_id", "created_at", "updated_at") VALUES ('Another day, another post! Feeling good on FriendZone. 20', 'https://picsum.photos/seed/991/600/400', 6, '2025-07-30 02:38:18.953824', '2025-07-30 02:38:18.953824') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (1.7ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user9! This is comment 1 from user6.', 6, 6, '2025-07-30 02:38:19.022240', '2025-07-30 02:38:19.022240') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (1.7ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user4! This is comment 2 from user10.', 10, 17, '2025-07-30 02:38:19.038103', '2025-07-30 02:38:19.038103') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.5ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 3 from user5.', 5, 13, '2025-07-30 02:38:19.046551', '2025-07-30 02:38:19.046551') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (18.4ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 4 from user2.', 2, 13, '2025-07-30 02:38:19.055131', '2025-07-30 02:38:19.055131') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user7! This is comment 5 from user4.', 4, 18, '2025-07-30 02:38:19.092840', '2025-07-30 02:38:19.092840') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (1.8ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user10! This is comment 6 from user4.', 4, 9, '2025-07-30 02:38:19.100843', '2025-07-30 02:38:19.100843') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.9ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user4! This is comment 7 from user2.', 2, 17, '2025-07-30 02:38:19.108933', '2025-07-30 02:38:19.108933') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.6ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 8 from user10.', 10, 13, '2025-07-30 02:38:19.116309', '2025-07-30 02:38:19.116309') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.6ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 9 from user1.', 1, 12, '2025-07-30 02:38:19.124622', '2025-07-30 02:38:19.124622') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.5ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user10! This is comment 10 from user9.', 9, 2, '2025-07-30 02:38:19.134032', '2025-07-30 02:38:19.134032') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.4ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 11 from user2.', 2, 4, '2025-07-30 02:38:19.142024', '2025-07-30 02:38:19.142024') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.3ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user3! This is comment 12 from user1.', 1, 7, '2025-07-30 02:38:19.150230', '2025-07-30 02:38:19.150230') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.4ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user7! This is comment 13 from user3.', 3, 15, '2025-07-30 02:38:19.157428', '2025-07-30 02:38:19.157428') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.5ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 14 from user6.', 6, 8, '2025-07-30 02:38:19.164977', '2025-07-30 02:38:19.164977') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.2ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 15 from user2.', 2, 13, '2025-07-30 02:38:19.171741', '2025-07-30 02:38:19.171741') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (8.6ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user3! This is comment 16 from user1.', 1, 7, '2025-07-30 02:38:19.178394', '2025-07-30 02:38:19.178394') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.8ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user7! This is comment 17 from user10.', 10, 18, '2025-07-30 02:38:19.191955', '2025-07-30 02:38:19.191955') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.3ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user8! This is comment 18 from user6.', 6, 3, '2025-07-30 02:38:19.199317', '2025-07-30 02:38:19.199317') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (4.4ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user7! This is comment 19 from user6.', 6, 15, '2025-07-30 02:38:19.209252', '2025-07-30 02:38:19.209252') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (3.3ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user10! This is comment 20 from user2.', 2, 2, '2025-07-30 02:38:19.220685', '2025-07-30 02:38:19.220685') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.7ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user6! This is comment 21 from user7.', 7, 20, '2025-07-30 02:38:19.229134', '2025-07-30 02:38:19.229134') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.7ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user4! This is comment 22 from user7.', 7, 10, '2025-07-30 02:38:19.238835', '2025-07-30 02:38:19.238835') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.3ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user10! This is comment 23 from user7.', 7, 9, '2025-07-30 02:38:19.247664', '2025-07-30 02:38:19.247664') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.7ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user7! This is comment 24 from user3.', 3, 18, '2025-07-30 02:38:19.255729', '2025-07-30 02:38:19.255729') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.6ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user10! This is comment 25 from user1.', 1, 9, '2025-07-30 02:38:19.263566', '2025-07-30 02:38:19.263566') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.1ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user6! This is comment 26 from user10.', 10, 20, '2025-07-30 02:38:19.270575', '2025-07-30 02:38:19.270575') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.3ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user9! This is comment 27 from user3.', 3, 6, '2025-07-30 02:38:19.277032', '2025-07-30 02:38:19.277032') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.6ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user10! This is comment 28 from user1.', 1, 9, '2025-07-30 02:38:19.288368', '2025-07-30 02:38:19.288368') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (2.4ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user1! This is comment 29 from user6.', 6, 4, '2025-07-30 02:38:19.295966', '2025-07-30 02:38:19.295966') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mComment Create (3.7ms)[0m  [1m[32mINSERT INTO "comments" ("content", "user_id", "post_id", "created_at", "updated_at") VALUES ('Great post, user3! This is comment 30 from user4.', 4, 19, '2025-07-30 02:38:19.308823', '2025-07-30 02:38:19.308823') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 16 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 16 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (4.1ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 16, '2025-07-30 02:38:19.377696', '2025-07-30 02:38:19.377696') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 14 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 14 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.7ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (10, 14, '2025-07-30 02:38:19.441439', '2025-07-30 02:38:19.441439') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 6 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 6 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.8ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 6, '2025-07-30 02:38:19.469261', '2025-07-30 02:38:19.469261') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 16 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 16 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.7ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (6, 16, '2025-07-30 02:38:19.493685', '2025-07-30 02:38:19.493685') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 11 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 11 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 11, '2025-07-30 02:38:19.521921', '2025-07-30 02:38:19.521921') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 17 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 17 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (4.1ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (4, 17, '2025-07-30 02:38:19.556149', '2025-07-30 02:38:19.556149') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 14 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 14 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.9ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (6, 14, '2025-07-30 02:38:19.584497', '2025-07-30 02:38:19.584497') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 3 AND "likes"."post_id" = 19 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 3 AND "likes"."post_id" = 19 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.7ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (3, 19, '2025-07-30 02:38:19.601231', '2025-07-30 02:38:19.601231') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 15 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 15 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (4.3ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (7, 15, '2025-07-30 02:38:19.615177', '2025-07-30 02:38:19.615177') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 2 AND "likes"."post_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 2 AND "likes"."post_id" = 5 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.9ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (2, 5, '2025-07-30 02:38:19.635917', '2025-07-30 02:38:19.635917') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 5 AND "likes"."post_id" = 7 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 5 AND "likes"."post_id" = 7 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.8ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (5, 7, '2025-07-30 02:38:19.650278', '2025-07-30 02:38:19.650278') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 16 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 13 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 13 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.4ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (6, 13, '2025-07-30 02:38:19.667160', '2025-07-30 02:38:19.667160') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 5 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (9, 5, '2025-07-30 02:38:19.686849', '2025-07-30 02:38:19.686849') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 18 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 18 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.4ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (9, 18, '2025-07-30 02:38:19.702565', '2025-07-30 02:38:19.702565') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 12 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 12 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.8ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (9, 12, '2025-07-30 02:38:19.718274', '2025-07-30 02:38:19.718274') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 19 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 19 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (4.9ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 19, '2025-07-30 02:38:19.730953', '2025-07-30 02:38:19.730953') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 16 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 8 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.2ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (9, 8, '2025-07-30 02:38:19.746098', '2025-07-30 02:38:19.746098') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 8 AND "likes"."post_id" = 15 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 8 AND "likes"."post_id" = 15 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.3ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (8, 15, '2025-07-30 02:38:19.761885', '2025-07-30 02:38:19.761885') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 17 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 17 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (1.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (7, 17, '2025-07-30 02:38:19.772032', '2025-07-30 02:38:19.772032') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 17 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 17 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.5ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (10, 17, '2025-07-30 02:38:19.794243', '2025-07-30 02:38:19.794243') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 5 AND "likes"."post_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 5 AND "likes"."post_id" = 5 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.9ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (5, 5, '2025-07-30 02:38:19.808126', '2025-07-30 02:38:19.808126') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 13 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 19 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 14 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 14 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.1ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (9, 14, '2025-07-30 02:38:19.826430', '2025-07-30 02:38:19.826430') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 2 AND "likes"."post_id" = 9 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 2 AND "likes"."post_id" = 9 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.5ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (2, 9, '2025-07-30 02:38:19.842091', '2025-07-30 02:38:19.842091') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 8 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.7ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 8, '2025-07-30 02:38:19.860722', '2025-07-30 02:38:19.860722') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 1 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.9ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (6, 1, '2025-07-30 02:38:19.877541', '2025-07-30 02:38:19.877541') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 11 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 11 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (8.8ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (7, 11, '2025-07-30 02:38:19.890780', '2025-07-30 02:38:19.890780') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 17 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 11 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 11 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.7ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (6, 11, '2025-07-30 02:38:19.914326', '2025-07-30 02:38:19.914326') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 18 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 18 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.1ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (7, 18, '2025-07-30 02:38:19.930558', '2025-07-30 02:38:19.930558') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 20 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 20 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.1ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 20, '2025-07-30 02:38:19.944187', '2025-07-30 02:38:19.944187') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 17 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 9 AND "likes"."post_id" = 12 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 16 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 16 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.2ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (10, 16, '2025-07-30 02:38:19.967619', '2025-07-30 02:38:19.967619') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 4 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 10 AND "likes"."post_id" = 4 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.3ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (10, 4, '2025-07-30 02:38:19.979565', '2025-07-30 02:38:19.979565') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 12 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 12 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.3ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (7, 12, '2025-07-30 02:38:19.992988', '2025-07-30 02:38:19.992988') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 16 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 17 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 17 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 17, '2025-07-30 02:38:20.013923', '2025-07-30 02:38:20.013923') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 7 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 7 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.2ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 7, '2025-07-30 02:38:20.028025', '2025-07-30 02:38:20.028025') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 18 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 18 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.3ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (4, 18, '2025-07-30 02:38:20.042483', '2025-07-30 02:38:20.042483') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 20 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 20 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (4.1ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (4, 20, '2025-07-30 02:38:20.053760', '2025-07-30 02:38:20.053760') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 1 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 1 AND "likes"."post_id" = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (1, 1, '2025-07-30 02:38:20.068691', '2025-07-30 02:38:20.068691') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 9 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 4 AND "likes"."post_id" = 9 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.0ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (4, 9, '2025-07-30 02:38:20.084646', '2025-07-30 02:38:20.084646') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 10 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 6 AND "likes"."post_id" = 10 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (2.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (6, 10, '2025-07-30 02:38:20.097653', '2025-07-30 02:38:20.097653') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 6 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Like Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."user_id" = 7 AND "likes"."post_id" = 6 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mLike Create (3.6ms)[0m  [1m[32mINSERT INTO "likes" ("user_id", "post_id", "created_at", "updated_at") VALUES (7, 6, '2025-07-30 02:38:20.114802', '2025-07-30 02:38:20.114802') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 6 AND "friendships"."friend_id" = 7 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 7 AND "friendships"."friend_id" = 6 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 6 AND "friendships"."friend_id" = 7 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (3.3ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (6, 7, 'pending', '2025-07-30 02:38:20.205182', '2025-07-30 02:38:20.205182') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 7 AND "friendships"."friend_id" = 9 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 9 AND "friendships"."friend_id" = 7 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 7 AND "friendships"."friend_id" = 9 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.5ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (7, 9, 'pending', '2025-07-30 02:38:20.234547', '2025-07-30 02:38:20.234547') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 6 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 6 AND "friendships"."friend_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 6 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.4ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (5, 6, 'pending', '2025-07-30 02:38:20.249868', '2025-07-30 02:38:20.249868') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 1 AND "friendships"."friend_id" = 4 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 1 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 1 AND "friendships"."friend_id" = 4 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.8ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (1, 4, 'pending', '2025-07-30 02:38:20.265704', '2025-07-30 02:38:20.265704') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 2 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 2 AND "friendships"."friend_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 2 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.8ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (8, 2, 'pending', '2025-07-30 02:38:20.281495', '2025-07-30 02:38:20.281495') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 2 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 2 AND "friendships"."friend_id" = 10 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 2 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.5ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (10, 2, 'accepted', '2025-07-30 02:38:20.303004', '2025-07-30 02:38:20.303004') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 2 AND "friendships"."friend_id" = 10 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (0.3ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (2, 10, 'accepted', '2025-07-30 02:38:20.318588', '2025-07-30 02:38:20.318588') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 9 AND "friendships"."friend_id" = 10 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 9 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 9 AND "friendships"."friend_id" = 10 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.8ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (9, 10, 'accepted', '2025-07-30 02:38:20.334418', '2025-07-30 02:38:20.334418') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (2.9ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 9 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (0.2ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (10, 9, 'accepted', '2025-07-30 02:38:20.348782', '2025-07-30 02:38:20.348782') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 3 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 3 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.6ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (5, 3, 'pending', '2025-07-30 02:38:20.364661', '2025-07-30 02:38:20.364661') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 4 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 4 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.5ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (8, 4, 'accepted', '2025-07-30 02:38:20.381020', '2025-07-30 02:38:20.381020') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (0.2ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (4, 8, 'accepted', '2025-07-30 02:38:20.395154', '2025-07-30 02:38:20.395154') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 5 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 3 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 10 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 10 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.8ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (8, 10, 'accepted', '2025-07-30 02:38:20.420645', '2025-07-30 02:38:20.420645') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (3.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (0.6ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (10, 8, 'accepted', '2025-07-30 02:38:20.436310', '2025-07-30 02:38:20.436310') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 7 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 7 AND "friendships"."friend_id" = 10 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 10 AND "friendships"."friend_id" = 7 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.4ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (10, 7, 'pending', '2025-07-30 02:38:20.450918', '2025-07-30 02:38:20.450918') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 6 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 6 AND "friendships"."friend_id" = 8 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 6 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.4ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (8, 6, 'pending', '2025-07-30 02:38:20.468526', '2025-07-30 02:38:20.468526') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 2 AND "friendships"."friend_id" = 1 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 1 AND "friendships"."friend_id" = 2 LIMIT 1 /*application='FriendZone'*/[0m
+  [1m[36mCACHE Friendship Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 2 AND "friendships"."friend_id" = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mFriendship Create (2.4ms)[0m  [1m[32mINSERT INTO "friendships" ("user_id", "friend_id", "status", "created_at", "updated_at") VALUES (2, 1, 'pending', '2025-07-30 02:38:20.484991', '2025-07-30 02:38:20.484991') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (3.6ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (5, 7, 'Hello user7, this is a message from user5. Message number 1.', NULL, '2025-07-30 02:38:20.529408', '2025-07-30 02:38:20.529408') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (2.8ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (3, 9, 'Hello user9, this is a message from user3. Message number 2.', NULL, '2025-07-30 02:38:20.555192', '2025-07-30 02:38:20.555192') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (2.9ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (10, 5, 'Hello user5, this is a message from user10. Message number 3.', NULL, '2025-07-30 02:38:20.579361', '2025-07-30 02:38:20.579361') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (3.1ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (7, 8, 'Hello user8, this is a message from user7. Message number 5.', NULL, '2025-07-30 02:38:20.587948', '2025-07-30 02:38:20.587948') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (6.1ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (4, 9, 'Hello user9, this is a message from user4. Message number 6.', NULL, '2025-07-30 02:38:20.596721', '2025-07-30 02:38:20.596721') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (5.8ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (3, 8, 'Hello user8, this is a message from user3. Message number 7.', NULL, '2025-07-30 02:38:20.610090', '2025-07-30 02:38:20.610090') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (3.2ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (9, 2, 'Hello user2, this is a message from user9. Message number 8.', NULL, '2025-07-30 02:38:20.622906', '2025-07-30 02:38:20.622906') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (2.7ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (9, 6, 'Hello user6, this is a message from user9. Message number 9.', NULL, '2025-07-30 02:38:20.632865', '2025-07-30 02:38:20.632865') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mMessage Create (2.9ms)[0m  [1m[32mINSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_at", "created_at", "updated_at") VALUES (2, 5, 'Hello user5, this is a message from user2. Message number 10.', NULL, '2025-07-30 02:38:20.646952', '2025-07-30 02:38:20.646952') RETURNING "id" /*application='FriendZone'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='FriendZone'*/[0m
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*application='FriendZone'*/[0m
+  [1m[36mPost Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts" /*application='FriendZone'*/[0m
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" /*application='FriendZone'*/[0m
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" /*application='FriendZone'*/[0m
+  [1m[36mFriendship Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "friendships" /*application='FriendZone'*/[0m
+  [1m[36mMessage Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "messages" /*application='FriendZone'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:38:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by HomeController#index as HTML
+Redirected to http://localhost:3131/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 33ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2025-07-30 04:38:38 +0200
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 16.7ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 7.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 38.2ms | GC: 0.0ms)
+Completed 200 OK in 66ms (Views: 45.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/friendzone-bdc8c625.css" for 127.0.0.1 at 2025-07-30 04:38:39 +0200
+Started GET "/assets/application-cf92b71b.css" for 127.0.0.1 at 2025-07-30 04:38:39 +0200
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-30 04:38:39 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started GET "/signup" for 127.0.0.1 at 2025-07-30 04:38:48 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 19.8ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 25.8ms | GC: 0.0ms)
+Completed 200 OK in 118ms (Views: 28.7ms | ActiveRecord: 3.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2025-07-30 04:39:00 +0200
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | GC: 0.0ms)
+Completed 200 OK in 20ms (Views: 9.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-30 04:39:01 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started POST "/login" for 127.0.0.1 at 2025-07-30 04:40:37 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "username"=>"user", "password"=>"[FILTERED]", "commit"=>"Log In"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = 'user' LIMIT 1 /*action='create',application='FriendZone',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:7:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.4ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 41ms (Views: 10.1ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 2.0ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-30 04:40:37 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started POST "/login" for 127.0.0.1 at 2025-07-30 04:40:44 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "username"=>"user", "password"=>"[FILTERED]", "commit"=>"Log In"}
+  [1m[36mUser Load (8.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = 'user' LIMIT 1 /*action='create',application='FriendZone',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:7:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 11.0ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.1ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 45ms (Views: 14.6ms | ActiveRecord: 8.4ms (1 query, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-30 04:40:44 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started GET "/signup" for 127.0.0.1 at 2025-07-30 04:40:50 +0200
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 15.2ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 7.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.8ms | GC: 0.0ms)
+Completed 200 OK in 37ms (Views: 25.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2025-07-30 04:42:00 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"Gift Mkyelu", "email"=>"[FILTERED]", "username"=>"GiftMk", "bio"=>"", "avatar"=>"https://plus.unsplash.com/premium_photo-1752192844251-b0bbb746ea49?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'mkyelugift@gmail.com' LIMIT 1 /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'GiftMk' LIMIT 1 /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "bio", "avatar", "password_digest", "created_at", "updated_at") VALUES ('Gift Mkyelu', 'mkyelugift@gmail.com', 'GiftMk', '', 'https://plus.unsplash.com/premium_photo-1752192844251-b0bbb746ea49?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8', '$2a$12$08mUt0KUn56exHqZ6eEuBO3nv.oDux9mz6N86ojDeOA510WgdrW4m', '2025-07-30 02:42:01.057302', '2025-07-30 02:42:01.057302') RETURNING "id" /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mTRANSACTION (16.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+Redirected to http://localhost:3131/
+Completed 302 Found in 319ms (ActiveRecord: 19.6ms (3 queries, 0 cached) | GC: 1.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:42:01 +0200
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 6.2ms | GC: 0.0ms)
+  [1m[36mPost Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:23
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (6, 3, 7, 4, 5, 2, 1, 10, 9, 8) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mLike Load (1.6ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" IN (20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" IN (20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 20 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 20 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 20 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 27.2ms | GC: 0.2ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 19 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 19 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 19 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 37.8ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 18 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 18 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 18 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 10.4ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 17 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 17 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 17 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 10.5ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 16 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 16 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 16 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 10.5ms | GC: 0.4ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 15 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 15 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 15 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 16.8ms | GC: 0.6ms)
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 14 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 14 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 14 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 30.5ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 13 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 13 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 13 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 12.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 12 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 12 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 12 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 11.8ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 11 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 11 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 11 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 11.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 10 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 10 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 10 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 6.3ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 9 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 9 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 9 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 5.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 8 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 8 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 8 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 13.3ms | GC: 6.8ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 7 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 7 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 7 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 7.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 6 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 6 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 6 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 18.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 5 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 11.3ms | GC: 0.8ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 4 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 4 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 4 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 9.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 3 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 3 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 3 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 8.5ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 2 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 2 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 2 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 1 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 5.5ms | GC: 0.5ms)
+  Rendered home/index.html.erb within layouts/application (Duration: 451.2ms | GC: 21.4ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 459.8ms | GC: 21.4ms)
+Completed 500 Internal Server Error in 505ms (ActiveRecord: 12.2ms (66 queries, 0 cached) | GC: 21.4ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friends_path' for an instance of #<Class:0x000079c6eab2ce58>)
+Caused by: NameError (undefined local variable or method `friends_path' for an instance of #<Class:0x000079c6eab2ce58>)
+
+Information for: ActionView::Template::Error (undefined local variable or method `friends_path' for an instance of #<Class:0x000079c6eab2ce58>):
+    4:     <ul>
+    5:       <% if logged_in? %>
+    6:         <li><%= link_to "Home", root_path %></li>
+    7:         <li><%= link_to "Friends", friends_path %></li>
+    8:         <li><%= link_to "Requests", friend_requests_path %></li>
+    9:         <li><%= link_to "Messages", messages_path %></li>
+   10:         <li><%= link_to "Create Post", new_post_path %></li>
+  
+app/views/shared/_navbar.html.erb:7
+app/views/layouts/application.html.erb:26
+
+Information for cause: NameError (undefined local variable or method `friends_path' for an instance of #<Class:0x000079c6eab2ce58>):
+  
+app/views/shared/_navbar.html.erb:7
+app/views/layouts/application.html.erb:26
+Started GET "/favicon.ico" for 127.0.0.1 at 2025-07-30 04:42:02 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:45:30 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 8.1ms | GC: 0.0ms)
+  [1m[36mPost Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:23
+  [1m[36mPost Load (1.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (6, 3, 7, 4, 5, 2, 1, 10, 9, 8) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" IN (20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mComment Load (0.9ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" IN (20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mLike Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 20 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 20 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 20 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 70.4ms | GC: 30.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 19 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 19 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 19 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 37.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 18 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 18 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 18 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 15.1ms | GC: 1.9ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 17 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 17 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 17 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 13.1ms | GC: 0.8ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 16 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 16 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 16 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 9.9ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 15 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 15 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 15 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 12.5ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 14 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 14 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 14 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 19.9ms | GC: 0.7ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 13 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 13 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 13 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 25.2ms | GC: 0.8ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 12 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 12 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 12 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 12.7ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 11 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 11 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 11 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 20.4ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 10 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 10 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 10 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 9.0ms | GC: 0.4ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 9 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 9 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 9 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 5.8ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 8 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 8 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 8 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.7ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 7 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 7 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 7 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 6.3ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 6 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 6 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 6 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 28.2ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 5 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 10.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 4 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 4 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 4 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.5ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 3 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 3 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 3 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 7.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 2 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 2 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 2 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 1 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.2ms | GC: 0.0ms)
+  Rendered home/index.html.erb within layouts/application (Duration: 490.8ms | GC: 36.1ms)
+  Rendered shared/_navbar.html.erb (Duration: 3.7ms | GC: 0.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 543.6ms | GC: 64.5ms)
+Completed 500 Internal Server Error in 672ms (ActiveRecord: 21.8ms (66 queries, 0 cached) | GC: 64.5ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>)
+Caused by: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>)
+
+Information for: ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>):
+     5:       <% if logged_in? %>
+     6:         <li><%= link_to "Home", root_path %></li>
+     7:         <li><%= link_to "Friends", friends_path %></li>
+     8:         <li><%= link_to "Requests", friend_requests_path %></li>
+     9:         <li><%= link_to "Messages", messages_path %></li>
+    10:         <li><%= link_to "Create Post", new_post_path %></li>
+    11:         <li>
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+
+Information for cause: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>):
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+Started POST "/users" for 127.0.0.1 at 2025-07-30 04:45:38 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"Gift Mkyelu", "email"=>"[FILTERED]", "username"=>"GiftMk", "bio"=>"", "avatar"=>"https://plus.unsplash.com/premium_photo-1752192844251-b0bbb746ea49?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'mkyelugift@gmail.com' LIMIT 1 /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'GiftMk' LIMIT 1 /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:12:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 41.5ms | GC: 8.5ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='create',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendered shared/_navbar.html.erb (Duration: 11.1ms | GC: 6.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 57.7ms | GC: 16.8ms)
+Completed 500 Internal Server Error in 340ms (ActiveRecord: 3.1ms (3 queries, 0 cached) | GC: 16.8ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>)
+Caused by: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>)
+
+Information for: ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>):
+     5:       <% if logged_in? %>
+     6:         <li><%= link_to "Home", root_path %></li>
+     7:         <li><%= link_to "Friends", friends_path %></li>
+     8:         <li><%= link_to "Requests", friend_requests_path %></li>
+     9:         <li><%= link_to "Messages", messages_path %></li>
+    10:         <li><%= link_to "Create Post", new_post_path %></li>
+    11:         <li>
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+app/controllers/users_controller.rb:17:in `create'
+
+Information for cause: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>):
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+app/controllers/users_controller.rb:17:in `create'
+Started GET "/" for 127.0.0.1 at 2025-07-30 04:45:54 +0200
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:45:54 +0200
+Processing by HomeController#index as */*
+Processing by HomeController#index as HTML
+Redirected to http://localhost:3131/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 75ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 14.3ms)
+
+
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:45:54 +0200
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+Processing by HomeController#index as */*
+  Rendered posts/_form.html.erb (Duration: 7.0ms | GC: 0.0ms)
+  [1m[36mPost Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:23
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (6, 3, 7, 4, 5, 2, 1, 10, 9, 8) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mLike Load (1.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" IN (20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" IN (20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:24
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 20 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 20 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (4.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 20 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 30.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 19 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 19 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 19 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 17.8ms | GC: 0.7ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 18 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 18 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 18 /*action='index',application='FriendZone',controller='home'*/[0m
+Redirected to http://localhost:3131/login
+  ↳ app/views/posts/_post.html.erb:30
+Started HEAD "/login" for 127.0.0.1 at 2025-07-30 04:45:55 +0200
+Filter chain halted as :require_login rendered or redirected
+  Rendered posts/_post.html.erb (Duration: 28.3ms | GC: 0.0ms)
+Completed 302 Found in 187ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.7ms)
+
+
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 17 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 17 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 17 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 35.5ms | GC: 4.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 16 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 16 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+Processing by SessionsController#new as */*
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 16 /*action='index',application='FriendZone',controller='home'*/[0m
+Started HEAD "/login" for 127.0.0.1 at 2025-07-30 04:45:55 +0200
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 41.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 15 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+Processing by SessionsController#new as */*
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 15 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 15 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 31.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 14 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 14 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  Rendering layout layouts/application.html.erb
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 14 /*action='index',application='FriendZone',controller='home'*/[0m
+  Rendering sessions/new.html.erb within layouts/application
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered sessions/new.html.erb within layouts/application (Duration: 18.2ms | GC: 6.9ms)
+  Rendered posts/_post.html.erb (Duration: 33.7ms | GC: 6.9ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.0ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 13 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  Rendered layout layouts/application.html.erb (Duration: 30.5ms | GC: 6.9ms)
+  ↳ app/views/posts/_post.html.erb:22
+Completed 200 OK in 89ms (Views: 37.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 6.9ms)
+
+
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 13 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 13 /*action='index',application='FriendZone',controller='home'*/[0m
+  Rendering layout layouts/application.html.erb
+  ↳ app/views/posts/_post.html.erb:30
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered posts/_post.html.erb (Duration: 32.4ms | GC: 1.0ms)
+  Rendered sessions/new.html.erb within layouts/application (Duration: 13.0ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 12 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  Rendered shared/_navbar.html.erb (Duration: 2.7ms | GC: 0.0ms)
+  ↳ app/views/posts/_post.html.erb:22
+  Rendered layout layouts/application.html.erb (Duration: 28.0ms | GC: 1.0ms)
+  [1m[36mLike Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 12 /*action='index',application='FriendZone',controller='home'*/[0m
+Completed 200 OK in 108ms (Views: 30.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 7.9ms)
+
+
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 12 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 28.2ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 11 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 11 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 11 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 37.3ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 10 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 10 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 10 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 7.5ms | GC: 0.4ms)
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 9 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 9 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 9 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 7.2ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 8 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 8 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 8 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 6.2ms | GC: 0.1ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 7 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 7 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 7 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 5.3ms | GC: 0.2ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 6 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 6 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 6 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 6.1ms | GC: 0.2ms)
+  [1m[36mLike Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 5 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 6.4ms | GC: 0.1ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 4 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 4 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 4 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 6.5ms | GC: 0.1ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 3 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 3 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 3 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.7ms | GC: 0.1ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 2 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 2 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 2 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 5.0ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 1 AND "likes"."user_id" = 11 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:30
+  Rendered posts/_post.html.erb (Duration: 4.5ms | GC: 0.2ms)
+  Rendered home/index.html.erb within layouts/application (Duration: 532.2ms | GC: 20.7ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 536.5ms | GC: 21.6ms)
+Completed 500 Internal Server Error in 655ms (ActiveRecord: 18.7ms (66 queries, 0 cached) | GC: 60.3ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>)
+Caused by: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>)
+
+Information for: ActionView::Template::Error (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>):
+     5:       <% if logged_in? %>
+     6:         <li><%= link_to "Home", root_path %></li>
+     7:         <li><%= link_to "Friends", friends_path %></li>
+     8:         <li><%= link_to "Requests", friend_requests_path %></li>
+     9:         <li><%= link_to "Messages", messages_path %></li>
+    10:         <li><%= link_to "Create Post", new_post_path %></li>
+    11:         <li>
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+
+Information for cause: NameError (undefined local variable or method `friend_requests_path' for an instance of #<Class:0x00007f2f78593180>):
+  
+app/views/shared/_navbar.html.erb:8
+app/views/layouts/application.html.erb:26
+Started HEAD "/" for 127.0.0.1 at 2025-07-30 04:45:58 +0200
+Processing by HomeController#index as */*
+Redirected to http://localhost:3131/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 17ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started HEAD "/login" for 127.0.0.1 at 2025-07-30 04:45:58 +0200
+Processing by SessionsController#new as */*
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 12.9ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.5ms | GC: 0.0ms)
+Completed 200 OK in 39ms (Views: 27.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+

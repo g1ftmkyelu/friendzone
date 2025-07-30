@@ -15,9 +15,13 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
+  # Top-level route for friends list
+  get '/friends', to: 'friendships#index', as: 'friends'
+
   resources :users, only: [:show, :create, :edit, :update] do
     member do
-      get :friends
+      # The 'friends' member route is not needed if a top-level 'friends' route exists for the navbar
+      # get :friends
       get :friend_requests
     end
   end
@@ -29,7 +33,7 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :update, :destroy] do
     collection do
-      get :requests # Custom route for friend requests page
+      get :requests, as: :friend_requests # Custom route for friend requests page
     end
   end
 
