@@ -227,11 +227,11 @@
   }
 
   .main-header .logo {
-    display: none; /* Hide logo in main header when sidebar is open */
+    display: block; /* Show logo in main header on desktop */
   }
 
   .sidebar-header .logo {
-    display: block; /* Show logo in sidebar header on desktop */
+    display: none; /* Hide logo in sidebar header on desktop */
   }
 
   /* Ensure main nav is visible on desktop */
