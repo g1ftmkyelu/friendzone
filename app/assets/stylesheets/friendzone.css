@@ -28,6 +28,12 @@
   text-decoration: none;
   letter-spacing: -0.05rem; /* Tighter letter spacing for a unique look */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+}
+
+.main-header .logo i {
+  margin-right: 10px; /* Spacing for the icon */
 }
 
 .main-header nav ul {
@@ -234,7 +240,7 @@
   }
 
   .main-header .logo {
-    display: block; /* Show logo in main header on desktop */
+    display: flex; /* Ensure logo is flex on desktop too */
   }
 
   .sidebar-header .logo {
