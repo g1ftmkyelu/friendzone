@@ -9,9 +9,12 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: fixed; /* Changed from sticky to fixed */
   top: 0;
-  z-index: 1000;
+  left: 0; /* Start at left edge */
+  width: 100%; /* Full width initially */
+  z-index: 999; /* Below sidebar, above main content */
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Transition for shifting */
 }
 
 .main-header .logo {
@@ -54,421 +57,187 @@
   border: 2px solid #ffffff;
 }
 
-/* Home Page / News Feed */
-.news-feed {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+/* Sidebar styles */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden; /* Prevent horizontal scroll during transition */
 }
 
-/* Post Card */
-.post-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50; /* Darker shade for sidebar */
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: -250px; /* Start off-screen */
+  height: 100%;
   padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
 }
 
-.post-header {
+.app-container.sidebar-open .sidebar {
+  left: 0; /* Slide in */
+}
+
+.sidebar-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
-.post-header .avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
-  object-fit: cover;
-}
-
-.post-header .username {
+.sidebar-header .logo {
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #333333;
+  color: #ffffff;
   text-decoration: none;
-  font-size: 1.1rem;
 }
 
-.post-content {
-  margin-bottom: 15px;
-}
-
-.post-content p {
-  margin: 0 0 10px 0;
-  color: #333333;
-}
-
-.post-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-.post-actions {
-  display: flex;
-  justify-content: space-around;
-  border-top: 1px solid #eeeeee;
-  padding-top: 15px;
-}
-
-.post-actions .action-button {
+.sidebar-close-button {
   background: none;
   border: none;
-  color: #555555;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 8px 15px;
-  border-radius: 5px;
-  transition: background-color 0.2s ease;
-}
-
-.post-actions .action-button:hover {
-  background-color: #f0f0f0;
-}
-
-.post-actions .action-button.liked {
-  color: #2ecc71; /* Primary color */
-}
-
-/* Post Detail Page */
-.post-detail-comments {
-  margin-top: 20px;
-  border-top: 1px solid #eeeeee;
-  padding-top: 20px;
-}
-
-.post-detail-comments h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-  color: #333333;
-}
-
-.comment-list {
-  margin-bottom: 20px;
-}
-
-.comment-item {
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: flex-start;
-}
-
-.comment-item .avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
-}
-
-.comment-item .comment-content-wrapper {
-  flex-grow: 1;
-}
-
-.comment-item .username {
-  font-weight: 600;
-  color: #333333;
-  margin-right: 5px;
-}
-
-.comment-item .content {
-  color: #555555;
-}
-
-.new-comment-form textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  resize: vertical;
-  min-height: 60px;
-  margin-bottom: 10px;
-}
-
-/* User Profile Page */
-.profile-header {
-  text-align: center;
-  margin-bottom: 30px;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.profile-avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 5px solid #2ecc71; /* Primary color */
-  margin-bottom: 15px;
-}
-
-.profile-username {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333333;
-  margin-bottom: 5px;
-}
-
-.profile-name {
-  font-size: 1.2rem;
-  color: #555555;
-  margin-bottom: 10px;
-}
-
-.profile-bio {
-  font-size: 1rem;
-  color: #777777;
-  max-width: 600px;
-  margin: 0 auto 20px auto;
-}
-
-.profile-actions {
-  margin-top: 20px;
-}
-
-.profile-posts-section {
-  margin-top: 30px;
-}
-
-.profile-posts-section h2 {
-  font-size: 1.8rem;
-  color: #333333;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Friends List & Friend Requests */
-.friends-list, .friend-requests-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.friend-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.friend-card .avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.friend-card .username {
-  font-weight: 600;
-  color: #333333;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
-
-.friend-card .friend-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* Messages Page */
-.messages-layout {
-  display: flex;
-  gap: 20px;
-}
-
-.conversations-list {
-  flex: 1;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-height: 70vh;
-  overflow-y: auto;
-}
-
-.conversations-list h2 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: #333333;
-}
-
-.conversation-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #eeeeee;
-  text-decoration: none;
-  color: #333333;
-  transition: background-color 0.2s ease;
-}
-
-.conversation-item:last-child {
-  border-bottom: none;
-}
-
-.conversation-item:hover {
-  background-color: #f0f0f0;
-}
-
-.conversation-item .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.conversation-item .username {
-  font-weight: 600;
-}
-
-.message-detail {
-  flex: 2;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  max-height: 70vh;
-}
-
-.message-header {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #333333;
-  text-align: center;
-}
-
-.message-list {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding-right: 10px; /* For scrollbar */
-  margin-bottom: 15px;
-}
-
-.message-item {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.message-item.sent {
-  justify-content: flex-end;
-}
-
-.message-item.received {
-  justify-content: flex-start;
-}
-
-.message-bubble {
-  max-width: 70%;
-  padding: 10px 15px;
-  border-radius: 18px;
-  line-height: 1.4;
-  word-wrap: break-word;
-}
-
-.message-item.sent .message-bubble {
-  background-color: #2ecc71; /* Primary color */
   color: #ffffff;
-  border-bottom-right-radius: 2px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px;
+  display: block; /* Always show close button in sidebar */
 }
 
-.message-item.received .message-bubble {
-  background-color: #e0e0e0;
-  color: #333333;
-  border-bottom-left-radius: 2px;
+.sidebar-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.new-message-form {
-  display: flex;
-  gap: 10px;
-  border-top: 1px solid #eeeeee;
-  padding-top: 15px;
+.sidebar-nav ul li {
+  margin-bottom: 15px;
 }
 
-.new-message-form textarea {
+.sidebar-nav ul li a,
+.sidebar-nav ul li .button {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li .button:hover {
+  background-color: #34495e;
+}
+
+/* Main content area */
+.main-layout-content {
   flex-grow: 1;
-  padding: 10px;
-  border: 1px solid #dddddd;
-  border-radius: 20px;
-  resize: none;
-  min-height: 40px;
-  max-height: 100px;
-  overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+  width: 100%;
+  padding-top: 70px; /* Account for fixed header height */
+  box-sizing: border-box; /* Include padding in width/height calculations */
 }
 
-.new-message-form .button {
-  padding: 10px 20px;
-  border-radius: 20px;
+/* When sidebar is open, shift main content */
+.app-container.sidebar-open .main-layout-content {
+  margin-left: 250px;
 }
 
-/* Settings Page */
-.settings-form {
-  max-width: 600px;
-  margin: 0 auto;
+/* Toggle button for sidebar */
+.sidebar-toggle-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-right: 15px;
+  display: block; /* Always show toggle button in main header */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .main-header {
-    padding: 1rem 15px;
+  .sidebar {
+    width: 200px;
+    left: -200px;
   }
 
-  .main-header nav ul li {
-    margin-left: 15px;
+  .app-container.sidebar-open .sidebar {
+    left: 0;
   }
 
-  .messages-layout {
-    flex-direction: column;
+  .app-container.sidebar-open .main-header {
+    left: 200px;
+    width: calc(100% - 200px);
   }
 
-  .conversations-list, .message-detail {
-    max-height: none;
-    overflow-y: visible;
+  .app-container.sidebar-open .main-layout-content {
+    margin-left: 200px;
+  }
+
+  /* Overlay for mobile when sidebar is open */
+  .app-container.sidebar-open .main-layout-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  /* Hide main nav links on smaller screens, rely on sidebar */
+  .main-header nav {
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
-  .main-header nav ul li {
-    margin-left: 10px;
+@media (min-width: 769px) {
+  /* On larger screens, sidebar is always open and main content is shifted */
+  .sidebar {
+    left: 0; /* Always visible */
+  }
+
+  .main-header {
+    left: 250px; /* Always shifted */
+    width: calc(100% - 250px); /* Always adjusted */
+  }
+
+  .main-layout-content {
+    margin-left: 250px; /* Always shifted */
+  }
+
+  .sidebar-toggle-button {
+    display: none; /* Hide toggle button on desktop */
+  }
+
+  .sidebar-close-button {
+    display: none; /* Hide close button on desktop */
   }
 
   .main-header .logo {
-    font-size: 1.5rem;
+    display: none; /* Hide logo in main header when sidebar is open */
   }
 
-  .post-header .avatar {
-    width: 40px;
-    height: 40px;
+  .sidebar-header .logo {
+    display: block; /* Show logo in sidebar header on desktop */
   }
 
-  .profile-avatar {
-    width: 100px;
-    height: 100px;
+  /* Ensure main nav is visible on desktop */
+  .main-header nav {
+    display: block;
   }
+}
 
-  .profile-username {
-    font-size: 2rem;
-  }
-
-  .friend-card .avatar {
-    width: 60px;
-    height: 60px;
-  }
+/* Adjustments for the .container class to work with the sidebar */
+.main-layout-content .container {
+  max-width: 960px; /* Keep original max-width */
+  margin: 20px auto;
+  padding: 0 20px;
 }
