@@ -9,12 +9,12 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Changed from sticky to fixed */
+  position: fixed;
   top: 0;
-  left: 0; /* Start at left edge */
-  width: 100%; /* Full width initially */
-  z-index: 999; /* Below sidebar, above main content */
-  transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Transition for shifting */
+  left: 0; /* Always start at left edge */
+  width: 100%; /* Always full width */
+  z-index: 1002; /* Above sidebar */
+  /* Removed transition for shifting as it will no longer shift */
 }
 
 .main-header .logo {
@@ -172,10 +172,11 @@
     left: 0;
   }
 
-  .app-container.sidebar-open .main-header {
-    left: 200px; /* Adjusted for new sidebar width */
-    width: calc(100% - 200px); /* Adjusted for new sidebar width */
-  }
+  /* Removed main-header shifting for mobile when sidebar is open */
+  /* .app-container.sidebar-open .main-header {
+    left: 200px;
+    width: calc(100% - 200px);
+  } */
 
   .app-container.sidebar-open .main-layout-content {
     margin-left: 200px; /* Adjusted for new sidebar width */
@@ -206,10 +207,11 @@
     left: 0; /* Always visible */
   }
 
-  .main-header {
-    left: 200px; /* Always shifted, adjusted for new sidebar width */
-    width: calc(100% - 200px); /* Always adjusted, adjusted for new sidebar width */
-  }
+  /* Removed main-header shifting for desktop */
+  /* .main-header {
+    left: 200px;
+    width: calc(100% - 200px);
+  } */
 
   .main-layout-content {
     margin-left: 200px; /* Always shifted, adjusted for new sidebar width */

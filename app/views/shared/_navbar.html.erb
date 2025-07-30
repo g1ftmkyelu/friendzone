@@ -4,8 +4,7 @@
   <nav>
     <ul>
       <% if logged_in? %>
-        <%# Home, Requests, Messages moved to sidebar %>
-        <li><%= link_to "Friends", friends_path %></li>
+        <%# Home, Requests, Messages, Friends, Settings moved to sidebar %>
         <li><%= link_to "Create Post", new_post_path %></li>
         <li>
           <%= link_to user_path(current_user) do %>
@@ -13,7 +12,6 @@
             <%= current_user.username %>
           <% end %>
         </li>
-        <li><%= link_to "Settings", edit_user_path(current_user) %></li>
         <li><%= button_to "Logout", logout_path, method: :delete, class: "button button-secondary" %></li>
       <% else %>
         <li><%= link_to "Login", login_path %></li>

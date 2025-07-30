@@ -25,6 +25,7 @@
 
   <body class="app-body">
     <div class="app-container" data-controller="sidebar">
+      <%= render 'shared/navbar' %> <%# Moved navbar outside main-layout-content %>
       <div class="sidebar" data-sidebar-target="sidebar">
         <div class="sidebar-header">
           <%= link_to "FriendZone", root_path, class: "logo" %>
@@ -48,7 +49,6 @@
         </nav>
       </div>
       <div class="main-layout-content" data-sidebar-target="mainContent">
-        <%= render 'shared/navbar' %>
         <%= yield %>
       </div>
     </div>
