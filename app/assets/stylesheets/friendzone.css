@@ -1,3 +1,6 @@
+/* Import a unique font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+
 /* Styles for FriendZone specific components */
 
 /* Header/Navbar */
@@ -18,10 +21,13 @@
 }
 
 .main-header .logo {
-  font-size: 1.8rem;
+  font-family: 'Poppins', sans-serif; /* Unique font */
+  font-size: 2.2rem; /* Upscaled font size */
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
+  letter-spacing: -0.05rem; /* Tighter letter spacing for a unique look */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .main-header nav ul {
@@ -93,6 +99,7 @@
 }
 
 .sidebar-header .logo {
+  font-family: 'Poppins', sans-serif; /* Unique font */
   font-size: 1.8rem;
   font-weight: 700;
   color: #333333; /* Changed logo color for white background */
