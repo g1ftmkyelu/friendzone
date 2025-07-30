@@ -43,7 +43,14 @@ class User < ApplicationRecord
   end
 
   def all_friends
-    (friends.where(friendships: { status: 'accepted' }) + inverse_friends.where(inverse_friendships: { status: 'accepted' })).uniq
+    # Get IDs of users who are friends (current_user is user_id, friend_id is friend)
+    accepted_as_sender_ids = friendships.accepted.pluck(:friend_id)
+
+    # Get IDs of users who are friends (current_user is friend_id, user_id is friend)
+    accepted_as_receiver_ids = inverse_friendships.accepted.pluck(:user_id)
+
+    # Combine and find unique users
+    User.where(id: (accepted_as_sender_ids + accepted_as_receiver_ids).uniq)
   end
 
   # Class method for searching users
@@ -56,10 +63,9 @@ class User < ApplicationRecord
     # Get IDs of current user, accepted friends, and users with pending requests (both ways)
     excluded_ids = [self.id] +
                    self.all_friends.pluck(:id) +
-                   self.friendships.where(status: 'pending').pluck(:friend_id) +
-                   self.inverse_friendships.where(status: 'pending').pluck(:user_id)
+                   self.friendships.pending.pluck(:friend_id) +
+                   self.inverse_friendships.pending.pluck(:user_id)
 
-    # Find users not in the excluded_ids list, order randomly, and limit
     User.where.not(id: excluded_ids.uniq)
         .order(Arel.sql('RANDOM()')) # RANDOM() for SQLite
         .limit(limit)

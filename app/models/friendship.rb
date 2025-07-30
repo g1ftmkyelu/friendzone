@@ -8,6 +8,10 @@ class Friendship < ApplicationRecord
   # Ensure a user cannot friend themselves
   validate :not_self_friendship
 
+  # Scopes for common friendship statuses
+  scope :accepted, -> { where(status: 'accepted') }
+  scope :pending, -> { where(status: 'pending') }
+
   private
 
   def not_self_friendship

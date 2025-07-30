@@ -10936,3 +10936,39 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 190ms (Views: 163.0ms | ActiveRecord: 11.2ms (67 queries, 0 cached) | GC: 10.7ms)
 
 
+Started GET "/" for 127.0.0.1 at 2025-07-30 06:13:30 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 8 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = 8 AND "friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `all_friends'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = 8 AND "inverse_friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `all_friends'
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 3.0ms (3 queries, 0 cached) | GC: 3.2ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: inverse_friendships.status:
+SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = 8 AND "inverse_friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/
+                                                                                                                                         ^)
+Caused by: SQLite3::SQLException (no such column: inverse_friendships.status:
+SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = 8 AND "inverse_friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/
+                                                                                                                                         ^)
+
+Information for: ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: inverse_friendships.status:
+SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = 8 AND "inverse_friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/
+                                                                                                                                         ^):
+  
+
+Information for cause: SQLite3::SQLException (no such column: inverse_friendships.status:
+SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."user_id" WHERE "friendships"."friend_id" = 8 AND "inverse_friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/
+                                                                                                                                         ^):
+  
+app/models/user.rb:46:in `all_friends'
+app/models/user.rb:58:in `recommended_users'
+app/controllers/home_controller.rb:9:in `index'
+Started GET "/favicon.ico" for 127.0.0.1 at 2025-07-30 06:13:31 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
