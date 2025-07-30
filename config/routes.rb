@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # Top-level route for friend requests page
   get '/friend_requests', to: 'friendships#requests', as: 'friend_requests'
 
+  # Route for exploring/searching users
+  get '/explore', to: 'users#search', as: 'explore_users'
+
   resources :users, only: [:show, :create, :edit, :update] do
     member do
       # The 'friends' member route is not needed if a top-level 'friends' route exists for the navbar

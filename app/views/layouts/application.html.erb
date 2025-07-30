@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "FriendZone" %></title>
+    <title><%= content_for(:title) || "The FriendZone" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -44,6 +44,11 @@
               <li>
                 <%= link_to root_path do %>
                   <i class="fa-solid fa-house"></i> Home
+                <% end %>
+              </li>
+              <li>
+                <%= link_to explore_users_path do %>
+                  <i class="fa-solid fa-magnifying-glass"></i> Explore
                 <% end %>
               </li>
               <li>

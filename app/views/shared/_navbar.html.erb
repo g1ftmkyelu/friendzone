@@ -1,12 +1,17 @@
 <header class="main-header">
   <button class="sidebar-toggle-button" data-action="sidebar#toggle">☰</button>
   <%= link_to root_path, class: "logo" do %>
-    <i class="fa-solid fa-user-group"></i> FriendZone
+    <i class="fa-solid fa-user-group"></i> The FriendZone
   <% end %>
   <nav>
     <ul>
       <% if logged_in? %>
         <%# Home, Requests, Messages, Friends, Settings moved to sidebar %>
+        <li>
+          <%= link_to explore_users_path do %>
+            <i class="fa-solid fa-magnifying-glass"></i> Explore
+          <% end %>
+        </li>
         <li>
           <%= link_to new_post_path do %>
             <i class="fa-solid fa-plus"></i> Create Post

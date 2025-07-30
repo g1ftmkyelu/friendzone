@@ -45,4 +45,9 @@ class User < ApplicationRecord
   def all_friends
     (friends.where(friendships: { status: 'accepted' }) + inverse_friends.where(inverse_friendships: { status: 'accepted' })).uniq
   end
+
+  # Class method for searching users
+  def self.search_by_query(query)
+    where("username LIKE ? OR name LIKE ?", "%#{query}%", "%#{query}%")
+  end
 end

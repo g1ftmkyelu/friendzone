@@ -1,6 +1,6 @@
-# FriendZone
+# The FriendZone
 
-This project is a social networking platform named "FriendZone", resembling Facebook in core functionality but with a distinct Emerald Green color scheme. It uses vanilla CSS for styling and is built with Ruby on Rails.
+This project is a social networking platform named "The FriendZone", resembling Facebook in core functionality but with a distinct Emerald Green color scheme. It uses vanilla CSS for styling and is built with Ruby on Rails.
 
 ## Project Structure
 

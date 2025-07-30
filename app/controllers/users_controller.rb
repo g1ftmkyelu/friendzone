@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: [:show, :edit, :update]
+  before_action :require_login, only: [:show, :edit, :update, :search] # Added :search
   before_action :set_user, only: [:show, :edit, :update]
   before_action :authorize_user!, only: [:edit, :update]
 
@@ -33,6 +33,23 @@ class UsersController < ApplicationController
     else
       flash.now[:alert] = 'Profile update failed.'
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def search
+    @query = params[:query]
+    if @query.present?
+      # Exclude current user from search results
+      # Exclude users who are already friends or have pending requests
+      excluded_user_ids = [current_user.id] + current_user.all_friends.pluck(:id) +
+                          current_user.friendships.where(status: 'pending').pluck(:friend_id) +
+                          current_user.inverse_friendships.where(status: 'pending').pluck(:user_id)
+
+      @users = User.search_by_query(@query)
+                   .where.not(id: excluded_user_ids.uniq)
+                   .order(:username)
+    else
+      @users = [] # No query, no results
     end
   end
 

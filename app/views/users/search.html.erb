@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="card-title">Explore Users</h1>
+
+  <div class="card">
+    <%= form_with url: explore_users_path, method: :get, local: true, class: "search-form" do |form| %>
+      <div class="form-group">
+        <%= form.label :query, "Search for users" %>
+        <%= form.text_field :query, placeholder: "Enter username or name...", value: @query %>
+      </div>
+      <div class="form-actions">
+        <%= form.submit "Search", class: "button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @query.present? %>
+    <h2 class="card-title" style="text-align: left; margin-top: 40px; margin-bottom: 20px;">Search Results for "<%= @query %>"</h2>
+    <% if @users.any? %>
+      <div class="friends-list"> <%# Reusing friends-list styling %>
+        <% @users.each do |user| %>
+          <div class="friend-card">
+            <%= image_tag user.avatar, alt: user.username, class: "avatar" %>
+            <%= link_to user.username, user_path(user), class: "username" %>
+            <div class="friend-actions">
+              <%= link_to user_path(user), class: "button button-secondary" do %>
+                <i class="fa-solid fa-eye"></i> View Profile
+              <% end %>
+              <%# Logic for friend request button %>
+              <% friendship_status = current_user.friendship_status_with(user) %>
+              <% if friendship_status == 'not_friends' %>
+                <%= button_to '<i class="fa-solid fa-user-plus"></i> Add Friend'.html_safe, friendships_path(friend_id: user.id), method: :post, class: "button" %>
+              <% elsif friendship_status == 'pending_outgoing' %>
+                <span class="button button-secondary"><i class="fa-solid fa-hourglass-half"></i> Request Sent</span>
+              <% elsif friendship_status == 'pending_incoming' %>
+                <%= button_to '<i class="fa-solid fa-check"></i> Accept Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: user)), method: :patch, class: "button" %>
+              <% elsif friendship_status == 'friends' %>
+                <span class="button button-secondary"><i class="fa-solid fa-user-group"></i> Friends</span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="card-paragraph">No users found matching your search criteria.</p>
+    <% end %>
+  <% else %>
+    <p class="card-paragraph">Enter a name or username to find new users.</p>
+  <% end %>
+</div>
