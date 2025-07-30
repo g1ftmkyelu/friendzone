@@ -1,15 +1,10 @@
 class MessagesController < ApplicationController
   before_action :require_login
   before_action :set_conversation_user, only: [:show, :create]
+  before_action :set_conversation_users_list, only: [:index, :show, :create]
 
   def index
-    # Get all users current_user has messaged or been messaged by
-    sent_to_users = current_user.sent_messages.pluck(:receiver_id)
-    received_from_users = current_user.received_messages.pluck(:sender_id)
-    
-    @conversation_users = User.where(id: (sent_to_users + received_from_users).uniq)
-                              .where.not(id: current_user.id)
-                              .order(:username)
+    # @conversation_users is already set by set_conversation_users_list
   end
 
   def show
@@ -44,6 +39,16 @@ class MessagesController < ApplicationController
 
   def set_conversation_user
     @conversation_user = User.find(params[:id])
+  end
+
+  def set_conversation_users_list
+    # Get all users current_user has messaged or been messaged by
+    sent_to_users = current_user.sent_messages.pluck(:receiver_id)
+    received_from_users = current_user.received_messages.pluck(:sender_id)
+    
+    @conversation_users = User.where(id: (sent_to_users + received_from_users).uniq)
+                              .where.not(id: current_user.id)
+                              .order(:username)
   end
 
   def message_params
