@@ -17,23 +17,29 @@
     <% if logged_in? && current_user != @user %>
       <div class="profile-actions">
         <% if @friendship_status == 'not_friends' %>
-          <%= button_to "Add Friend", friendships_path(friend_id: @user.id), method: :post, class: "button" %>
+          <%= button_to '<i class="fa-solid fa-user-plus"></i> Add Friend'.html_safe, friendships_path(friend_id: @user.id), method: :post, class: "button" %>
         <% elsif @friendship_status == 'pending_outgoing' %>
-          <span class="button button-secondary">Friend Request Sent</span>
-          <%= button_to "Cancel Request", friendship_path(current_user.friendships.find_by(friend: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+          <span class="button button-secondary"><i class="fa-solid fa-hourglass-half"></i> Friend Request Sent</span>
+          <%= button_to '<i class="fa-solid fa-trash"></i> Cancel Request'.html_safe, friendship_path(current_user.friendships.find_by(friend: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
         <% elsif @friendship_status == 'pending_incoming' %>
-          <%= button_to "Accept Request", friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :patch, class: "button" %>
-          <%= button_to "Decline Request", friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+          <%= button_to '<i class="fa-solid fa-check"></i> Accept Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :patch, class: "button" %>
+          <%= button_to '<i class="fa-solid fa-trash"></i> Decline Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
         <% elsif @friendship_status == 'friends' %>
-          <span class="button button-secondary">Friends</span>
-          <%= button_to "Remove Friend", friendship_path(current_user.friendships.find_by(friend: @user) || current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+          <span class="button button-secondary"><i class="fa-solid fa-user-group"></i> Friends</span>
+          <%= button_to '<i class="fa-solid fa-trash"></i> Remove Friend'.html_safe, friendship_path(current_user.friendships.find_by(friend: @user) || current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
         <% end %>
-        <%= link_to "Message", message_path(@user), class: "button" %>
+        <%= link_to message_path(@user), class: "button" do %>
+          <i class="fa-solid fa-envelope"></i> Message
+        <% end %>
       </div>
     <% elsif logged_in? && current_user == @user %>
       <div class="profile-actions">
-        <%= link_to "Edit Profile", edit_user_path(@user), class: "button" %>
-        <%= link_to "My Friends", friends_path, class: "button button-secondary" %>
+        <%= link_to edit_user_path(@user), class: "button" do %>
+          <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+        <% end %>
+        <%= link_to friends_path, class: "button button-secondary" do %>
+          <i class="fa-solid fa-user-group"></i> My Friends
+        <% end %>
       </div>
     <% end %>
   </div>

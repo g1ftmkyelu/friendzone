@@ -55,6 +55,9 @@ body {
   border: none;
   cursor: pointer;
   font-size: 1rem;
+  display: flex; /* Added for icon alignment */
+  align-items: center; /* Added for icon alignment */
+  justify-content: center; /* Added for icon alignment */
 }
 
 .button:hover {
@@ -161,4 +164,12 @@ body {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
+}
+
+/* Font Awesome Icon Spacing */
+.button i,
+.action-button i,
+.main-header nav ul li a i,
+.sidebar-nav ul li a i {
+  margin-right: 8px;
 }

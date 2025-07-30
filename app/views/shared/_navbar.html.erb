@@ -5,17 +5,33 @@
     <ul>
       <% if logged_in? %>
         <%# Home, Requests, Messages, Friends, Settings moved to sidebar %>
-        <li><%= link_to "Create Post", new_post_path %></li>
+        <li>
+          <%= link_to new_post_path do %>
+            <i class="fa-solid fa-plus"></i> Create Post
+          <% end %>
+        </li>
         <li>
           <%= link_to user_path(current_user) do %>
             <%= image_tag current_user_avatar, alt: current_user.username %>
-            <%= current_user.username %>
+            <i class="fa-solid fa-user"></i> <%= current_user.username %>
           <% end %>
         </li>
-        <li><%= button_to "Logout", logout_path, method: :delete, class: "button button-secondary" %></li>
+        <li>
+          <%= button_to logout_path, method: :delete, class: "button button-secondary" do %>
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          <% end %>
+        </li>
       <% else %>
-        <li><%= link_to "Login", login_path %></li>
-        <li><%= link_to "Sign Up", signup_path, class: "button" %></li>
+        <li>
+          <%= link_to login_path do %>
+            <i class="fa-solid fa-right-to-bracket"></i> Login
+          <% end %>
+        </li>
+        <li>
+          <%= link_to signup_path, class: "button" do %>
+            <i class="fa-solid fa-user-plus"></i> Sign Up
+          <% end %>
+        </li>
       <% end %>
     </ul>
   </nav>
