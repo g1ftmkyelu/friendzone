@@ -4,19 +4,18 @@ export default class extends Controller {
   static targets = ["menu"]
 
   connect() {
-    this.menuTarget.classList.add("hidden"); // Ensure it's hidden initially
+    // Ensure the dropdown is closed on connect by removing the 'open' class from the parent element.
+    this.element.classList.remove("open");
   }
 
   toggle() {
-    this.menuTarget.classList.toggle("hidden");
-    // Add/remove 'open' class on the parent element for CSS transitions
+    // Toggle the 'open' class on the parent element (data-controller="dropdown")
     this.element.classList.toggle("open");
   }
 
   hide(event) {
-    // If the click is outside the dropdown element and the menu is not hidden
-    if (!this.element.contains(event.target) && !this.menuTarget.classList.contains("hidden")) {
-      this.menuTarget.classList.add("hidden");
+    // If the click is outside the dropdown element and the dropdown is currently open, close it.
+    if (!this.element.contains(event.target) && this.element.classList.contains("open")) {
       this.element.classList.remove("open");
     }
   }
