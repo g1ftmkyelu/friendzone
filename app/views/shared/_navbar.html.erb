@@ -17,16 +17,20 @@
             <i class="fa-solid fa-plus"></i> Create Post
           <% end %>
         </li>
-        <li>
-          <%= link_to user_path(current_user) do %>
+        <li class="profile-dropdown" data-controller="dropdown">
+          <a href="#" class="profile-dropdown-toggle" data-action="click->dropdown#toggle">
             <%= image_tag current_user_avatar, alt: current_user.username %>
-            <i class="fa-solid fa-user"></i> <%= current_user.username %>
-          <% end %>
-        </li>
-        <li>
-          <%= button_to logout_path, method: :delete, class: "button button-secondary" do %>
-            <i class="fa-solid fa-right-from-bracket"></i> Logout
-          <% end %>
+            <%= current_user.username %>
+            <i class="fa-solid fa-caret-down"></i>
+          </a>
+          <div class="profile-dropdown-menu" data-dropdown-target="menu">
+            <%= link_to user_path(current_user), class: "dropdown-item" do %>
+              <i class="fa-solid fa-user"></i> Profile Page
+            <% end %>
+            <%= button_to logout_path, method: :delete, class: "dropdown-item" do %>
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            <% end %>
+          </div>
         </li>
       <% else %>
         <li>

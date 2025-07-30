@@ -30,7 +30,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="app-body">
+  <body class="app-body" data-action="click@window->dropdown#hide"> <%# Added data-action here %>
     <div class="app-container" data-controller="sidebar">
       <%= render 'shared/navbar' %> <%# Moved navbar outside main-layout-content %>
       <div class="sidebar" data-sidebar-target="sidebar">
