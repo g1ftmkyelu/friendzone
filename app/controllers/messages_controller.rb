@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :require_login
-  before_action :set_conversation_user, only: [:show, :create]
+  before_action :set_conversation_user, only: [:show] # Removed :create from here
   before_action :set_conversation_users_list, only: [:index, :show, :create]
 
   def index
@@ -20,12 +20,17 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = current_user.sent_messages.build(message_params)
-    @message.receiver = @conversation_user
+    # Find the receiver from the form parameters
+    receiver = User.find(message_params[:receiver_id])
+
+    @message = current_user.sent_messages.build(message_params.except(:receiver_id))
+    @message.receiver = receiver
 
     if @message.save
-      redirect_to message_path(@conversation_user), notice: 'Message sent!'
+      redirect_to message_path(receiver), notice: 'Message sent!'
     else
+      # If save fails, re-populate @conversation_user and @messages for rendering :show
+      @conversation_user = receiver # Set @conversation_user for rendering
       @messages = Message.where(
         "(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)",
         current_user.id, @conversation_user.id, @conversation_user.id, current_user.id
@@ -52,6 +57,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :receiver_id) # Permit receiver_id
   end
 end

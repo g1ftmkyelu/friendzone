@@ -29,7 +29,8 @@
       </div>
 
       <div class="new-message-form">
-        <%= form_with model: [@message], url: messages_path(@conversation_user), method: :post, local: true do |form| %>
+        <%= form_with model: @message, url: messages_path, method: :post, local: true do |form| %>
+          <%= form.hidden_field :receiver_id, value: @conversation_user.id %>
           <%= form.text_area :content, placeholder: "Type your message...", rows: 1 %>
           <%= form.submit "Send", class: "button" %>
         <% end %>
