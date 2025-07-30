@@ -66,13 +66,13 @@
 }
 
 .sidebar {
-  width: 250px;
-  background-color: #2c3e50; /* Darker shade for sidebar */
-  color: #ffffff;
+  width: 200px; /* Reduced width */
+  background-color: #ffffff; /* Changed to white */
+  color: #333333; /* Changed text color for white background */
   position: fixed;
-  top: 0;
-  left: -250px; /* Start off-screen */
-  height: 100%;
+  top: 70px; /* Placed under the top bar */
+  left: -200px; /* Start off-screen, adjusted for new width */
+  height: calc(100% - 70px); /* Adjusted height to fit below header */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out;
@@ -95,14 +95,14 @@
 .sidebar-header .logo {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #333333; /* Changed logo color for white background */
   text-decoration: none;
 }
 
 .sidebar-close-button {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #333333; /* Changed close button color for white background */
   font-size: 1.5rem;
   cursor: pointer;
   padding: 5px;
@@ -121,7 +121,7 @@
 
 .sidebar-nav ul li a,
 .sidebar-nav ul li .button {
-  color: #ffffff;
+  color: #333333; /* Changed text color for white background */
   text-decoration: none;
   font-weight: 600;
   display: block;
@@ -132,7 +132,7 @@
 
 .sidebar-nav ul li a:hover,
 .sidebar-nav ul li .button:hover {
-  background-color: #34495e;
+  background-color: #e0e0e0; /* Lighter hover color for white background */
 }
 
 /* Main content area */
@@ -146,8 +146,8 @@
 
 /* When sidebar is open, shift main content */
 .app-container.sidebar-open .main-layout-content {
-  margin-left: 250px; /* Default for larger screens */
-  width: calc(100% - 250px); /* Default for larger screens */
+  margin-left: 200px; /* Adjusted for new sidebar width */
+  width: calc(100% - 200px); /* Adjusted for new sidebar width */
 }
 
 /* Toggle button for sidebar */
@@ -164,8 +164,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sidebar {
-    width: 200px;
-    left: -200px;
+    width: 200px; /* Adjusted for new width */
+    left: -200px; /* Adjusted for new width */
   }
 
   .app-container.sidebar-open .sidebar {
@@ -173,12 +173,12 @@
   }
 
   .app-container.sidebar-open .main-header {
-    left: 200px;
-    width: calc(100% - 200px);
+    left: 200px; /* Adjusted for new sidebar width */
+    width: calc(100% - 200px); /* Adjusted for new sidebar width */
   }
 
   .app-container.sidebar-open .main-layout-content {
-    margin-left: 200px;
+    margin-left: 200px; /* Adjusted for new sidebar width */
     width: calc(100% - 200px); /* Adjusted width for mobile when sidebar is open */
   }
 
@@ -207,13 +207,13 @@
   }
 
   .main-header {
-    left: 250px; /* Always shifted */
-    width: calc(100% - 250px); /* Always adjusted */
+    left: 200px; /* Always shifted, adjusted for new sidebar width */
+    width: calc(100% - 200px); /* Always adjusted, adjusted for new sidebar width */
   }
 
   .main-layout-content {
-    margin-left: 250px; /* Always shifted */
-    width: calc(100% - 250px); /* Adjusted width for desktop */
+    margin-left: 200px; /* Always shifted, adjusted for new sidebar width */
+    width: calc(100% - 200px); /* Adjusted width for desktop */
   }
 
   .sidebar-toggle-button {
@@ -241,6 +241,6 @@
 /* Adjustments for the .container class to work with the sidebar */
 .main-layout-content .container {
   max-width: 960px; /* Keep original max-width */
-  margin: 20px auto;
+  margin: 20px 20px 20px auto; /* Pushed content to the right */
   padding: 0 20px;
 }
