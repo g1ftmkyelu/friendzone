@@ -17,6 +17,14 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id', dependent: :destroy
   has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id', dependent: :destroy
 
+  # Communities
+  has_many :created_communities, class_name: 'Community', foreign_key: 'creator_id', dependent: :destroy
+  has_many :community_memberships, dependent: :destroy
+  has_many :communities, through: :community_memberships
+
+  # Blogs
+  has_many :blogs, dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 100 }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true, uniqueness: true, length: { in: 3..50 }, format: { with: /\A[a-zA-Z0-9_]+\z/, message: "only allows letters, numbers, and underscores" }
@@ -69,5 +77,18 @@ class User < ApplicationRecord
     User.where.not(id: excluded_ids.uniq)
         .order(Arel.sql('RANDOM()')) # RANDOM() for SQLite
         .limit(limit)
+  end
+
+  # Helper method to check community membership status
+  def community_membership_status_with(community)
+    return nil unless community # Ensure community exists
+
+    membership = community_memberships.find_by(community: community)
+
+    if membership
+      membership.status
+    else
+      'not_member'
+    end
   end
 end

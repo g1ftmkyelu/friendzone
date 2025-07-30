@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="card-title">All Communities</h1>
+
+  <% if logged_in? %>
+    <div class="form-actions" style="text-align: right; margin-bottom: 20px;">
+      <%= link_to new_community_path, class: "button" do %>
+        <i class="fa-solid fa-plus"></i> Create New Community
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @communities.any? %>
+    <div class="community-list">
+      <% @communities.each do |community| %>
+        <%= render 'community', community: community %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="card-paragraph">No communities yet. Be the first to create one!</p>
+  <% end %>
+</div>

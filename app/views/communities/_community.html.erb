@@ -1,0 +1,9 @@
+<div class="community-card">
+  <h2 class="community-name"><%= link_to community.name, community_path(community) %></h2>
+  <p class="community-description"><%= truncate(community.description, length: 150) %></p>
+  <p class="community-meta">Created by <%= link_to community.creator.username, user_path(community.creator) %></p>
+  <p class="community-meta"><%= community.members.count %> Members</p>
+  <div class="community-actions">
+    <%= link_to "View Community", community_path(community), class: "button" %>
+  </div>
+</div>

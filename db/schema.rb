@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_29_170000) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_30_000002) do
+  create_table "blogs", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "content", null: false
     t.integer "user_id", null: false
@@ -19,6 +28,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_170000) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "communities", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_communities_on_creator_id"
+    t.index ["name"], name: "index_communities_on_name", unique: true
+  end
+
+  create_table "community_memberships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "community_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_community_memberships_on_community_id"
+    t.index ["user_id", "community_id"], name: "index_community_memberships_on_user_id_and_community_id", unique: true
+    t.index ["user_id"], name: "index_community_memberships_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -85,8 +115,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_170000) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "blogs", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "communities", "users", column: "creator_id"
+  add_foreign_key "community_memberships", "communities"
+  add_foreign_key "community_memberships", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "likes", "posts"

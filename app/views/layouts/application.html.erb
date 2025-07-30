@@ -66,6 +66,16 @@
                   <i class="fa-solid fa-user-group"></i> Friends
                 <% end %>
               </li>
+              <li>
+                <%= link_to communities_path do %>
+                  <i class="fa-solid fa-users"></i> Communities
+                <% end %>
+              </li>
+              <li>
+                <%= link_to blogs_path do %>
+                  <i class="fa-solid fa-blog"></i> Blogs
+                <% end %>
+              </li>
               <%# "Create Post", "Profile", and "Logout" moved to top bar %>
             <% else %>
               <li>

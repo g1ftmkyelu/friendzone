@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="card-title">All Blogs</h1>
+
+  <% if logged_in? %>
+    <div class="form-actions" style="text-align: right; margin-bottom: 20px;">
+      <%= link_to new_blog_path, class: "button" do %>
+        <i class="fa-solid fa-plus"></i> Create New Blog
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @blogs.any? %>
+    <div class="blog-list">
+      <% @blogs.each do |blog| %>
+        <%= render 'blog', blog: blog %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="card-paragraph">No blog posts yet. Be the first to write one!</p>
+  <% end %>
+</div>

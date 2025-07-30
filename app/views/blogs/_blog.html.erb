@@ -1,0 +1,12 @@
+<div class="blog-card">
+  <h2 class="blog-title"><%= link_to blog.title, blog_path(blog) %></h2>
+  <p class="blog-meta">By <%= link_to blog.user.username, user_path(blog.user) %> | <%= time_ago_in_words(blog.created_at) %> ago</p>
+  <p class="blog-content"><%= truncate(blog.content, length: 200) %></p>
+  <div class="blog-actions">
+    <%= link_to "Read More", blog_path(blog), class: "button button-secondary" %>
+    <% if logged_in? && blog.user == current_user %>
+      <%= link_to "Edit", edit_blog_path(blog), class: "button button-secondary" %>
+      <%= button_to "Delete", blog_path(blog), method: :delete, data: { confirm: "Are you sure you want to delete this blog post?" }, class: "button button-danger" %>
+    <% end %>
+  </div>
+</div>

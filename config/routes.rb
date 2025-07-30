@@ -41,6 +41,12 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:index, :show, :create]
 
+  resources :communities do
+    resources :community_memberships, only: [:create, :update, :destroy]
+  end
+
+  resources :blogs
+
   # Defines the root path route ("/")
   root "home#index"
 end

@@ -1,0 +1,54 @@
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="flash notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="flash alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <div class="community-detail-card">
+    <h1><%= @community.name %></h1>
+    <p class="community-meta">Created by <%= link_to @community.creator.username, user_path(@community.creator) %></p>
+    <p class="community-meta"><%= @community.members.count %> Members</p>
+    <p class="community-description"><%= @community.description %></p>
+
+    <div class="community-actions">
+      <%= link_to "Back to Communities", communities_path, class: "button button-secondary" %>
+
+      <% if logged_in? %>
+        <% if @community.creator == current_user %>
+          <%= link_to "Edit Community", edit_community_path(@community), class: "button" %>
+          <%= button_to "Delete Community", community_path(@community), method: :delete, data: { confirm: "Are you sure you want to delete this community?" }, class: "button button-danger" %>
+        <% else %>
+          <% if @membership_status == 'accepted' %>
+            <span class="button button-secondary"><i class="fa-solid fa-check"></i> Joined</span>
+            <%= button_to '<i class="fa-solid fa-right-from-bracket"></i> Leave Community'.html_safe, community_community_membership_path(@community, current_user.community_memberships.find_by(community: @community)), method: :delete, data: { confirm: "Are you sure you want to leave this community?" }, class: "button button-danger" %>
+          <% elsif @membership_status == 'pending' %>
+            <span class="button button-secondary"><i class="fa-solid fa-hourglass-half"></i> Request Sent</span>
+          <% else %>
+            <%= button_to '<i class="fa-solid fa-user-plus"></i> Join Community'.html_safe, community_community_memberships_path(@community), method: :post, class: "button" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% if @memberships.any? %>
+      <div class="community-members-list">
+        <h3>Members</h3>
+        <div class="community-members-grid">
+          <% @memberships.each do |membership| %>
+            <div class="community-member-item">
+              <%= image_tag membership.user.avatar, alt: membership.user.username, class: "avatar" %>
+              <%= link_to membership.user.username, user_path(membership.user), class: "username" %>
+              <% if logged_in? && @community.creator == current_user && membership.user != current_user %>
+                <%= button_to "Remove", community_community_membership_path(@community, membership), method: :delete, data: { confirm: "Are you sure you want to remove #{membership.user.username} from this community?" }, class: "button button-danger button-small" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <p class="card-paragraph" style="margin-top: 2rem;">No members yet, be the first to join!</p>
+    <% end %>
+  </div>
+</div>
