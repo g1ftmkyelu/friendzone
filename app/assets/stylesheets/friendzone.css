@@ -7,7 +7,7 @@
 .main-header {
   background-color: #2ecc71; /* Primary color */
   color: #ffffff;
-  padding: 1rem 20px;
+  padding: 1rem 40px; /* Increased right padding for better visibility of dropdown */
   display: flex;
   justify-content: space-between;
   align-items: center;

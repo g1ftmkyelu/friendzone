@@ -12018,3 +12018,59 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 276ms (Views: 222.8ms | ActiveRecord: 21.5ms (94 queries, 0 cached) | GC: 24.3ms)
 
 
+Started GET "/users/11" for 127.0.0.1 at 2025-07-30 06:24:50 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 8 LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:59:in `set_user'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 11 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:32:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 8 AND "friendships"."user_id" = 11 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:32:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 11 AND "friendships"."status" = 'pending' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:35:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 8 AND "friendships"."user_id" = 11 AND "friendships"."status" = 'pending' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:38:in `friendship_status_with'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = 11 LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/views/users/show.html.erb:50
+  Rendered users/show.html.erb within layouts/application (Duration: 8.2ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 2.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 19.8ms | GC: 0.0ms)
+Completed 200 OK in 119ms (Views: 29.5ms | ActiveRecord: 3.3ms (7 queries, 0 cached) | GC: 6.0ms)
+
+
+Started GET "/assets/friendzone-38b51db2.css" for 127.0.0.1 at 2025-07-30 06:24:50 +0200
+Started GET "/users/11" for 127.0.0.1 at 2025-07-30 06:24:54 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 8 LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:59:in `set_user'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 11 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:32:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 8 AND "friendships"."user_id" = 11 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:32:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 8 AND "friendships"."friend_id" = 11 AND "friendships"."status" = 'pending' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:35:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 8 AND "friendships"."user_id" = 11 AND "friendships"."status" = 'pending' LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/models/user.rb:38:in `friendship_status_with'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" WHERE "posts"."user_id" = 11 LIMIT 1 /*action='show',application='FriendZone',controller='users'*/[0m
+  ↳ app/views/users/show.html.erb:50
+  Rendered users/show.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | GC: 0.0ms)
+Completed 200 OK in 40ms (Views: 8.1ms | ActiveRecord: 1.1ms (7 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-07-30 06:24:55 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
