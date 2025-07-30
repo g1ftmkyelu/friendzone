@@ -7,7 +7,7 @@
 .main-header {
   background-color: #2ecc71; /* Primary color */
   color: #ffffff;
-  padding: 1rem 60px; /* Increased right padding for better visibility of dropdown */
+  padding: 0.5rem 60px; /* Scaled down padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +22,7 @@
 
 .main-header .logo {
   font-family: 'Poppins', sans-serif; /* Unique font */
-  font-size: 2.2rem; /* Upscaled font size */
+  font-size: 1.8rem; /* Scaled down font size */
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
@@ -33,7 +33,7 @@
 }
 
 .main-header .logo i {
-  margin-right: 10px; /* Spacing for the icon */
+  margin-right: 8px; /* Spacing for the icon, scaled down */
 }
 
 .main-header nav ul {
@@ -62,8 +62,8 @@
 }
 
 .main-header nav ul li a img {
-  width: 30px;
-  height: 30px;
+  width: 24px; /* Scaled down avatar size */
+  height: 24px; /* Scaled down avatar size */
   border-radius: 50%;
   margin-right: 8px;
   border: 2px solid #ffffff;
@@ -89,8 +89,8 @@
 }
 
 .profile-dropdown-toggle img {
-  width: 30px;
-  height: 30px;
+  width: 24px; /* Scaled down avatar size */
+  height: 24px; /* Scaled down avatar size */
   border-radius: 50%;
   margin-right: 8px;
   border: 2px solid #ffffff;
@@ -146,9 +146,9 @@
   background-color: #ffffff; /* Changed to white */
   color: #333333; /* Changed text color for white background */
   position: fixed;
-  top: 70px; /* Placed under the top bar */
+  top: 50px; /* Adjusted to new top bar height */
   left: -200px; /* Start off-screen, adjusted for new width */
-  height: calc(100% - 70px); /* Adjusted height to fit below header */
+  height: calc(100% - 50px); /* Adjusted height to fit below header */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out;
@@ -217,7 +217,7 @@
   flex-grow: 1;
   transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out; /* Added width to transition */
   width: 100%; /* Default width */
-  padding-top: 70px; /* Account for fixed header height */
+  padding-top: 50px; /* Account for fixed header height */
   box-sizing: border-box; /* Include padding in width/height calculations */
 }
 
@@ -232,7 +232,7 @@
   background: none;
   border: none;
   color: #ffffff;
-  font-size: 1.8rem;
+  font-size: 1.5rem; /* Scaled down font size */
   cursor: pointer;
   margin-right: 15px;
   display: block; /* Always show toggle button in main header */
@@ -293,6 +293,7 @@
   .main-layout-content {
     margin-left: 200px; /* Always shifted, adjusted for new sidebar width */
     width: calc(100% - 200px); /* Adjusted width for desktop */
+    padding-top: 50px; /* Account for fixed header height */
   }
 
   .sidebar-toggle-button {
@@ -352,7 +353,7 @@
 .recommendation-column {
   /* This column will contain the new recommendation panel */
   position: sticky; /* Makes the panel "fixed" relative to its scrollable parent */
-  top: 90px; /* Adjust this value to clear the fixed header and add some margin */
+  top: 70px; /* Adjusted to new header height + margin */
   align-self: start; /* Ensures it sticks to the top of its grid cell */
   height: fit-content; /* Only take up as much height as content needs */
   /* The card styling is applied via the .card class in the partial */
