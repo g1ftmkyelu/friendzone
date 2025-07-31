@@ -1,9 +1,9 @@
 {
   "projectId": "6888db3d7ba1820cf5711e88",
-  "projectName": "The FriendZone",
+  "projectName": "FriendZone",
   "techStack": "rails",
   "createdAt": "2025-07-29T14:31:25.733Z",
-  "lastModified": "2025-07-30T03:48:56.438Z",
+  "lastModified": "2025-07-31T09:31:47.927Z",
   "cdevEditorCompatible": true,
   "editorVersion": "1.0.0",
   "workspaceSettings": {
@@ -22,8 +22,10 @@
     "*.log",
     ".env"
   ],
-  "lastEditorAccess": "2025-07-30T03:48:56.438Z",
-  "currentSession": "1v1tzobpl",
+  "lastEditorAccess": "2025-07-31T09:31:07.521Z",
+  "currentSession": "xbxybzzns",
   "isOpenInEditor": true,
-  "frontendPort": 3131
+  "frontendPort": 3131,
+  "renamedAt": "2025-07-31T09:31:47.927Z",
+  "previousName": "myapp"
 }
