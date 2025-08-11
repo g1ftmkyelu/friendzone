@@ -3,7 +3,7 @@
   "projectName": "FriendZone",
   "techStack": "rails",
   "createdAt": "2025-07-29T14:31:25.733Z",
-  "lastModified": "2025-07-31T09:31:47.927Z",
+  "lastModified": "2025-08-11T18:23:38.936Z",
   "cdevEditorCompatible": true,
   "editorVersion": "1.0.0",
   "workspaceSettings": {
@@ -22,8 +22,8 @@
     "*.log",
     ".env"
   ],
-  "lastEditorAccess": "2025-07-31T09:31:07.521Z",
-  "currentSession": "xbxybzzns",
+  "lastEditorAccess": "2025-08-11T18:23:38.936Z",
+  "currentSession": "6q0zvly3i",
   "isOpenInEditor": true,
   "frontendPort": 3131,
   "renamedAt": "2025-07-31T09:31:47.927Z",
