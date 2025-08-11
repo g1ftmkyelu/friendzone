@@ -1,39 +1,41 @@
-<div class="container">
-  <h1 class="card-title">Messages with <%= @conversation_user.username %></h1>
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center text-foreground mb-8">Messages with <%= @conversation_user.username %></h1>
 
-  <div class="messages-layout">
-    <div class="conversations-list">
-      <h2>Conversations</h2>
+  <div class="flex flex-col md:flex-row gap-6 min-h-[calc(100vh-150px)]">
+    <div class="flex-shrink-0 w-full md:w-72 bg-card text-card-foreground rounded-lg shadow-md p-6">
+      <h2 class="text-2xl font-semibold text-foreground mb-5 border-b border-border pb-3">Conversations</h2>
       <% if @conversation_users.any? %>
-        <% @conversation_users.each do |user| %>
-          <%= link_to message_path(user), class: "conversation-item #{'active' if user == @conversation_user}" do %>
-            <%= image_tag user.avatar, alt: user.username, class: "avatar" %>
-            <span class="username"><%= user.username %></span>
+        <div class="flex flex-col">
+          <% @conversation_users.each do |user| %>
+            <%= link_to message_path(user), class: "flex items-center p-3 mb-2 rounded-md text-foreground transition-colors hover:bg-muted #{'bg-primary/10 text-primary font-semibold' if user == @conversation_user}" do %>
+              <%= image_tag user.avatar, alt: user.username, class: "h-10 w-10 rounded-full object-cover mr-3" %>
+              <span class="text-base"><%= user.username %></span>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       <% else %>
-        <p>No conversations yet.</p>
+        <p class="text-center text-muted-foreground text-base">No conversations yet.</p>
       <% end %>
     </div>
 
-    <div class="message-detail">
-      <h2 class="message-header">Conversation with <%= @conversation_user.username %></h2>
-      <div class="message-list">
+    <div class="flex-grow bg-card text-card-foreground rounded-lg shadow-md p-6 flex flex-col">
+      <h2 class="text-2xl font-bold text-foreground mb-5 border-b border-border pb-3 text-center">Conversation with <%= @conversation_user.username %></h2>
+      <div class="flex-grow overflow-y-auto pr-2 mb-6 flex flex-col">
         <% if @messages.any? %>
           <% @messages.each do |message| %>
             <%= render 'messages/message', message: message %>
           <% end %>
         <% else %>
-          <p class="card-paragraph">No messages in this conversation yet.</p>
+          <p class="text-center text-muted-foreground text-lg flex-grow flex items-center justify-center">No messages in this conversation yet.</p>
         <% end %>
       </div>
 
-      <div class="new-message-form">
-        <%= form_with model: @message, url: messages_path, method: :post, local: true do |form| %>
+      <div class="pt-6 border-t border-border flex gap-3">
+        <%= form_with model: @message, url: messages_path, method: :post, local: true, class: "flex-grow flex gap-3" do |form| %>
           <%= form.hidden_field :receiver_id, value: @conversation_user.id %>
-          <%= form.text_area :content, placeholder: "Type your message...", rows: 1 %>
-          <%= form.submit "Send", class: "button" do %>
-            <i class="fa-solid fa-paper-plane"></i> Send
+          <%= form.text_area :content, placeholder: "Type your message...", rows: 1, class: "flex-grow px-4 py-2 border border-input rounded-full text-sm bg-background resize-none min-h-[40px] max-h-[100px] overflow-y-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" %>
+          <%= form.button type: :submit, class: "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-5 py-2 flex-shrink-0" do %>
+            <i class="fa-solid fa-paper-plane"></i> <span class="hidden sm:inline ml-2">Send</span>
           <% end %>
         <% end %>
       </div>

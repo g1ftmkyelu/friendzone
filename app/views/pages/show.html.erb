@@ -1,10 +1,10 @@
-<div class="pages-container">
-  <div class="page-detail-card">
-    <h1><%= @page.name %></h1>
-    <p class="category">Category: <%= @page.category %></p>
-    <p class="likes"><%= @page.likes_count %> Likes</p>
-    <p class="description"><%= @page.description %></p>
+<div class="bg-background py-8 px-4">
+  <div class="bg-card text-card-foreground rounded-lg shadow-md p-8 max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold text-foreground mb-2"><%= @page.name %></h1>
+    <p class="text-base text-muted-foreground mb-1">Category: <%= @page.category %></p>
+    <p class="text-base text-muted-foreground mb-6"><%= @page.likes_count %> Likes</p>
+    <p class="text-lg text-foreground leading-relaxed mb-8"><%= @page.description %></p>
 
-    <%= link_to "Back to Pages", pages_path, class: "back-button" %>
+    <%= link_to "Back to Pages", pages_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2" %>
   </div>
 </div>

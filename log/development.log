@@ -20181,3 +20181,52 @@ Started GET "/icon.png" for 127.0.0.1 at 2025-08-11 20:29:53 +0200
   
 ActionController::RoutingError (No route matches [GET] "/icon.png"):
   
+Started GET "/blogs" for 127.0.0.1 at 2025-08-11 20:32:24 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by BlogsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering blogs/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='blogs'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mBlog Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "blogs" LIMIT 1 /*action='index',application='FriendZone',controller='blogs'*/[0m
+  ↳ app/views/blogs/index.html.erb:12
+  [1m[36mBlog Load (2.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" ORDER BY "blogs"."created_at" DESC /*action='index',application='FriendZone',controller='blogs'*/[0m
+  ↳ app/views/blogs/index.html.erb:14
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (12, 19, 15, 17, 13, 18) /*action='index',application='FriendZone',controller='blogs'*/[0m
+  ↳ app/views/blogs/index.html.erb:14
+  Rendered blogs/_blog.html.erb (Duration: 6.4ms | GC: 3.5ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 2.5ms | GC: 2.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered blogs/_blog.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered blogs/index.html.erb within layouts/application (Duration: 98.5ms | GC: 47.4ms)
+  Rendered shared/_navbar.html.erb (Duration: 3.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 105.4ms | GC: 47.4ms)
+Completed 200 OK in 135ms (Views: 103.6ms | ActiveRecord: 6.3ms (4 queries, 0 cached) | GC: 51.9ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-08-11 20:32:30 +0200
+Started GET "/icon.svg" for 127.0.0.1 at 2025-08-11 20:32:30 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/icon.svg"):
+  
+Started GET "/explore" for 127.0.0.1 at 2025-08-11 20:44:36 +0200
+Processing by UsersController#search as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='search',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/search.html.erb within layouts/application
+  Rendered users/search.html.erb within layouts/application (Duration: 4.3ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 2.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | GC: 0.4ms)
+Completed 200 OK in 26ms (Views: 11.1ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.4ms)
+
+

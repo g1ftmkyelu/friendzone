@@ -1,7 +1,8 @@
-<div class="message-item <%= message.sender == current_user ? 'sent' : 'received' %>">
-  <div class="message-bubble">
+<div class="flex mb-2 <%= message.sender == current_user ? 'justify-end' : 'justify-start' %>">
+  <div class="max-w-[70%] px-4 py-2 rounded-xl leading-tight text-sm break-words
+    <%= message.sender == current_user ? 'bg-primary text-primary-foreground rounded-br-sm' : 'bg-muted text-muted-foreground rounded-bl-sm' %>">
     <%= message.content %>
     <br>
-    <small><%= time_ago_in_words(message.created_at) %> ago</small>
+    <small class="block text-xs mt-1 opacity-80 <%= message.sender == current_user ? 'text-right' : 'text-left' %>"><%= time_ago_in_words(message.created_at) %> ago</small>
   </div>
 </div>

@@ -1,9 +1,9 @@
-<div class="community-card">
-  <h2 class="community-name"><%= link_to community.name, community_path(community) %></h2>
-  <p class="community-description"><%= truncate(community.description, length: 150) %></p>
-  <p class="community-meta">Created by <%= link_to community.creator.username, user_path(community.creator) %></p>
-  <p class="community-meta"><%= community.members.count %> Members</p>
-  <div class="community-actions">
-    <%= link_to "View Community", community_path(community), class: "button" %>
+<div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
+  <h2 class="text-xl font-semibold text-primary mb-2"><%= link_to community.name, community_path(community), class: "hover:underline" %></h2>
+  <p class="text-sm text-muted-foreground mb-4 flex-grow"><%= truncate(community.description, length: 150) %></p>
+  <p class="text-xs text-muted-foreground mb-1">Created by <%= link_to community.creator.username, user_path(community.creator), class: "hover:underline" %></p>
+  <p class="text-xs text-muted-foreground mb-4"><%= community.members.count %> Members</p>
+  <div class="flex justify-center">
+    <%= link_to "View Community", community_path(community), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
   </div>
 </div>

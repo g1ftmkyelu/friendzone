@@ -1,38 +1,38 @@
-<div class="container">
+<div class="max-w-3xl mx-auto px-4 py-8">
   <% if flash[:notice] %>
-    <div class="flash notice"><%= flash[:notice] %></div>
+    <div class="bg-green-100 text-green-800 border border-green-200 rounded-md px-4 py-2 font-medium text-center mb-4"><%= flash[:notice] %></div>
   <% end %>
   <% if flash[:alert] %>
-    <div class="flash alert"><%= flash[:alert] %></div>
+    <div class="bg-red-100 text-red-800 border border-red-200 rounded-md px-4 py-2 font-medium text-center mb-4"><%= flash[:alert] %></div>
   <% end %>
 
   <%= render 'post', post: @post %>
 
-  <div class="card post-detail-comments">
-    <h3>Comments (<%= @comments.count %>)</h3>
-    <div class="comment-list">
+  <div class="bg-card text-card-foreground rounded-lg shadow-md p-6 mt-6">
+    <h3 class="text-2xl font-semibold text-foreground mb-4">Comments (<%= @comments.count %>)</h3>
+    <div class="flex flex-col">
       <% if @comments.any? %>
         <% @comments.each do |comment| %>
           <%= render 'comments/comment', comment: comment %>
         <% end %>
       <% else %>
-        <p>No comments yet. Be the first to comment!</p>
+        <p class="text-center text-muted-foreground text-base">No comments yet. Be the first to comment!</p>
       <% end %>
     </div>
 
     <% if logged_in? %>
-      <div class="new-comment-form">
+      <div class="mt-8 pt-6 border-t border-border">
         <%= form_with model: [@post, @comment], local: true do |form| %>
-          <div class="form-group">
-            <%= form.text_area :content, placeholder: "Write a comment...", rows: 2 %>
+          <div class="mb-4">
+            <%= form.text_area :content, placeholder: "Write a comment...", rows: 2, class: "flex min-h-[60px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-y" %>
           </div>
-          <div class="form-actions">
-            <%= form.submit "Add Comment", class: "button" %>
+          <div class="text-right mt-4">
+            <%= form.submit "Add Comment", class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 cursor-pointer" %>
           </div>
         <% end %>
       </div>
     <% else %>
-      <p class="card-paragraph">Please <%= link_to "log in", login_path %> to add a comment.</p>
+      <p class="text-center text-muted-foreground text-base mt-6">Please <%= link_to "log in", login_path, class: "text-primary hover:underline" %> to add a comment.</p>
     <% end %>
   </div>
 </div>

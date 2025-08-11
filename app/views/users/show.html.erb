@@ -1,58 +1,58 @@
-<div class="container">
+<div class="max-w-4xl mx-auto px-4 py-8">
   <% if flash[:notice] %>
-    <div class="flash notice"><%= flash[:notice] %></div>
+    <div class="bg-green-100 text-green-800 border border-green-200 rounded-md px-4 py-2 font-medium text-center mb-4"><%= flash[:notice] %></div>
   <% end %>
   <% if flash[:alert] %>
-    <div class="flash alert"><%= flash[:alert] %></div>
+    <div class="bg-red-100 text-red-800 border border-red-200 rounded-md px-4 py-2 font-medium text-center mb-4"><%= flash[:alert] %></div>
   <% end %>
 
-  <div class="profile-header">
-    <%= image_tag @user.avatar, alt: @user.username, class: "profile-avatar" %>
-    <h1 class="profile-username"><%= @user.username %></h1>
-    <p class="profile-name"><%= @user.name %></p>
+  <div class="bg-card text-card-foreground rounded-lg shadow-md p-8 text-center mb-6">
+    <%= image_tag @user.avatar, alt: @user.username, class: "h-36 w-36 rounded-full object-cover mx-auto mb-6 border-4 border-primary" %>
+    <h1 class="text-4xl font-bold text-foreground mb-2"><%= @user.username %></h1>
+    <p class="text-lg text-muted-foreground mb-4"><%= @user.name %></p>
     <% if @user.bio.present? %>
-      <p class="profile-bio"><%= @user.bio %></p>
+      <p class="text-base text-foreground leading-relaxed mb-8 max-w-2xl mx-auto"><%= @user.bio %></p>
     <% end %>
 
     <% if logged_in? && current_user != @user %>
-      <div class="profile-actions">
+      <div class="flex flex-wrap justify-center gap-3">
         <% if @friendship_status == 'not_friends' %>
-          <%= button_to '<i class="fa-solid fa-user-plus"></i> Add Friend'.html_safe, friendships_path(friend_id: @user.id), method: :post, class: "button" %>
+          <%= button_to '<i class="fa-solid fa-user-plus mr-2"></i> Add Friend'.html_safe, friendships_path(friend_id: @user.id), method: :post, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
         <% elsif @friendship_status == 'pending_outgoing' %>
-          <span class="button button-secondary"><i class="fa-solid fa-hourglass-half"></i> Friend Request Sent</span>
-          <%= button_to '<i class="fa-solid fa-trash"></i> Cancel Request'.html_safe, friendship_path(current_user.friendships.find_by(friend: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+          <span class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground h-10 px-4 py-2"><i class="fa-solid fa-hourglass-half mr-2"></i> Friend Request Sent</span>
+          <%= button_to '<i class="fa-solid fa-trash mr-2"></i> Cancel Request'.html_safe, friendship_path(current_user.friendships.find_by(friend: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2" %>
         <% elsif @friendship_status == 'pending_incoming' %>
-          <%= button_to '<i class="fa-solid fa-check"></i> Accept Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :patch, class: "button" %>
-          <%= button_to '<i class="fa-solid fa-trash"></i> Decline Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+          <%= button_to '<i class="fa-solid fa-check mr-2"></i> Accept Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :patch, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
+          <%= button_to '<i class="fa-solid fa-trash mr-2"></i> Decline Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2" %>
         <% elsif @friendship_status == 'friends' %>
-          <span class="button button-secondary"><i class="fa-solid fa-user-group"></i> Friends</span>
-          <%= button_to '<i class="fa-solid fa-trash"></i> Remove Friend'.html_safe, friendship_path(current_user.friendships.find_by(friend: @user) || current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "button button-danger" %>
+          <span class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground h-10 px-4 py-2"><i class="fa-solid fa-user-group mr-2"></i> Friends</span>
+          <%= button_to '<i class="fa-solid fa-trash mr-2"></i> Remove Friend'.html_safe, friendship_path(current_user.friendships.find_by(friend: @user) || current_user.inverse_friendships.find_by(user: @user)), method: :delete, data: { confirm: "Are you sure?" }, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2" %>
         <% end %>
-        <%= link_to message_path(@user), class: "button" do %>
-          <i class="fa-solid fa-envelope"></i> Message
+        <%= link_to message_path(@user), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" do %>
+          <i class="fa-solid fa-envelope mr-2"></i> Message
         <% end %>
       </div>
     <% elsif logged_in? && current_user == @user %>
-      <div class="profile-actions">
-        <%= link_to edit_user_path(@user), class: "button" do %>
-          <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+      <div class="flex flex-wrap justify-center gap-3">
+        <%= link_to edit_user_path(@user), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" do %>
+          <i class="fa-solid fa-pen-to-square mr-2"></i> Edit Profile
         <% end %>
-        <%= link_to friends_path, class: "button button-secondary" do %>
-          <i class="fa-solid fa-user-group"></i> My Friends
+        <%= link_to friends_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2" do %>
+          <i class="fa-solid fa-user-group mr-2"></i> My Friends
         <% end %>
       </div>
     <% end %>
   </div>
 
-  <div class="profile-posts-section">
-    <h2><%= @user.username %>'s Posts</h2>
-    <div class="news-feed">
+  <div class="mt-12">
+    <h2 class="text-3xl font-bold text-center text-foreground mb-6"><%= @user.username %>'s Posts</h2>
+    <div class="grid gap-6">
       <% if @posts.any? %>
         <% @posts.each do |post| %>
           <%= render 'posts/post', post: post %>
         <% end %>
       <% else %>
-        <p class="card-paragraph"><%= @user.username %> hasn't posted anything yet.</p>
+        <p class="text-center text-muted-foreground text-lg"><%= @user.username %> hasn't posted anything yet.</p>
       <% end %>
     </div>
   </div>

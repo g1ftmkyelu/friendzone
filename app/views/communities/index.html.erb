@@ -1,21 +1,21 @@
-<div class="container">
-  <h1 class="card-title">All Communities</h1>
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center text-foreground mb-8">All Communities</h1>
 
   <% if logged_in? %>
-    <div class="form-actions" style="text-align: right; margin-bottom: 20px;">
-      <%= link_to new_community_path, class: "button" do %>
-        <i class="fa-solid fa-plus"></i> Create New Community
+    <div class="text-right mb-6">
+      <%= link_to new_community_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" do %>
+        <i class="fa-solid fa-plus mr-2"></i> Create New Community
       <% end %>
     </div>
   <% end %>
 
   <% if @communities.any? %>
-    <div class="community-list">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <% @communities.each do |community| %>
         <%= render 'community', community: community %>
       <% end %>
     </div>
   <% else %>
-    <p class="card-paragraph">No communities yet. Be the first to create one!</p>
+    <p class="text-center text-muted-foreground text-lg mt-10">No communities yet. Be the first to create one!</p>
   <% end %>
 </div>

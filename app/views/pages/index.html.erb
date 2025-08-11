@@ -1,14 +1,14 @@
-<div class="pages-container">
-  <h1 class="card-title" style="text-align: center; margin-bottom: 2rem;">Discover Pages</h1>
+<div class="bg-background min-h-[calc(100vh-50px)] py-8 px-4">
+  <h1 class="text-3xl font-bold text-center text-foreground mb-8">Discover Pages</h1>
 
-  <div class="page-list">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
     <% @pages.each do |page| %>
-      <div class="page-card">
-        <h2><%= link_to page.name, page_path(page), class: "card-title" %></h2>
-        <p class="category"><%= page.category %></p>
-        <p><%= truncate(page.description, length: 100) %></p>
-        <p class="likes"><%= page.likes_count %> Likes</p>
-        <%= link_to "View Page", page_path(page), class: "button" %>
+      <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 text-center flex flex-col items-center">
+        <h2 class="text-xl font-semibold text-foreground mb-2"><%= link_to page.name, page_path(page), class: "hover:underline" %></h2>
+        <p class="text-sm text-muted-foreground mb-1"><%= page.category %></p>
+        <p class="text-sm text-foreground mb-4 flex-grow"><%= truncate(page.description, length: 100) %></p>
+        <p class="text-sm text-muted-foreground mb-4"><%= page.likes_count %> Likes</p>
+        <%= link_to "View Page", page_path(page), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2" %>
       </div>
     <% end %>
   </div>

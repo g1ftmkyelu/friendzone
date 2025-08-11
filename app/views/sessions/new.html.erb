@@ -1,28 +1,28 @@
-<div class="container">
-  <div class="card">
-    <h1 class="card-title">Log In to The FriendZone</h1>
+<div class="max-w-md mx-auto px-4 py-8">
+  <div class="bg-card text-card-foreground p-8 rounded-lg shadow-md mb-6">
+    <h1 class="text-3xl font-bold text-center text-foreground mb-6">Log In to The FriendZone</h1>
     <% if flash[:alert] %>
-      <div class="flash alert"><%= flash[:alert] %></div>
+      <div class="bg-red-100 text-red-800 border border-red-200 rounded-md px-4 py-2 font-medium text-center mb-4"><%= flash[:alert] %></div>
     <% end %>
 
     <%= form_with(url: login_path, local: true) do |form| %>
-      <div class="form-group">
-        <%= form.label :username %>
-        <%= form.text_field :username, placeholder: "Your username" %>
+      <div class="mb-4">
+        <%= form.label :username, class: "block text-sm font-medium text-foreground mb-1" %>
+        <%= form.text_field :username, placeholder: "Your username", class: "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" %>
       </div>
 
-      <div class="form-group">
-        <%= form.label :password %>
-        <%= form.password_field :password, placeholder: "Your password" %>
+      <div class="mb-6">
+        <%= form.label :password, class: "block text-sm font-medium text-foreground mb-1" %>
+        <%= form.password_field :password, placeholder: "Your password", class: "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" %>
       </div>
 
-      <div class="form-actions">
-        <%= form.submit "Log In", class: "button" %>
+      <div class="text-center">
+        <%= form.submit "Log In", class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 cursor-pointer" %>
       </div>
     <% end %>
 
-    <p class="card-paragraph" style="margin-top: 20px;">
-      Don't have an account? <%= link_to "Sign Up", signup_path %>
+    <p class="text-center text-muted-foreground text-base mt-6">
+      Don't have an account? <%= link_to "Sign Up", signup_path, class: "text-primary hover:underline" %>
     </p>
   </div>
 </div>

@@ -1,49 +1,48 @@
-<div class="container">
-  <h1 class="card-title">Explore Users</h1>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center text-foreground mb-8">Explore Users</h1>
 
-  <div class="card">
-    <%= form_with url: explore_users_path, method: :get, local: true, class: "search-form" do |form| %>
-      <div class="form-group">
-        <%= form.label :query, "Search for users" %>
-        <%= form.text_field :query, placeholder: "Enter username or name...", value: @query %>
+  <div class="bg-card text-card-foreground p-8 rounded-lg shadow-md mb-6">
+    <%= form_with url: explore_users_path, method: :get, local: true, class: "flex flex-col gap-4" do |form| %>
+      <div class="mb-2">
+        <%= form.label :query, "Search for users", class: "block text-sm font-medium text-foreground mb-1" %>
+        <%= form.text_field :query, placeholder: "Enter username or name...", value: @query, class: "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" %>
       </div>
-      <div class="form-actions">
-        <%= form.submit "Search", class: "button" %>
+      <div class="text-center">
+        <%= form.submit "Search", class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 cursor-pointer" %>
       </div>
     <% end %>
   </div>
 
   <% if @query.present? %>
-    <h2 class="card-title" style="text-align: left; margin-top: 40px; margin-bottom: 20px;">Search Results for "<%= @query %>"</h2>
+    <h2 class="text-2xl font-semibold text-foreground mt-8 mb-4">Search Results for "<%= @query %>"</h2>
     <% if @users.any? %>
-      <div class="friends-list"> <%# Reusing friends-list styling %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <% @users.each do |user| %>
-          <div class="friend-card">
-            <%= image_tag user.avatar, alt: user.username, class: "avatar" %>
-            <%= link_to user.username, user_path(user), class: "username" %>
-            <div class="friend-actions">
-              <%= link_to user_path(user), class: "button button-secondary" do %>
-                <i class="fa-solid fa-eye"></i> View Profile
+          <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
+            <%= image_tag user.avatar, alt: user.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary" %>
+            <%= link_to user.username, user_path(user), class: "text-lg font-semibold text-foreground hover:underline mb-4" %>
+            <div class="flex flex-wrap justify-center gap-2">
+              <%= link_to user_path(user), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-3 py-1" do %>
+                <i class="fa-solid fa-eye mr-2"></i> View Profile
               <% end %>
-              <%# Logic for friend request button %>
               <% friendship_status = current_user.friendship_status_with(user) %>
               <% if friendship_status == 'not_friends' %>
-                <%= button_to '<i class="fa-solid fa-user-plus"></i> Add Friend'.html_safe, friendships_path(friend_id: user.id), method: :post, class: "button" %>
+                <%= button_to '<i class="fa-solid fa-user-plus mr-2"></i> Add Friend'.html_safe, friendships_path(friend_id: user.id), method: :post, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 py-1" %>
               <% elsif friendship_status == 'pending_outgoing' %>
-                <span class="button button-secondary"><i class="fa-solid fa-hourglass-half"></i> Request Sent</span>
+                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground h-9 px-3 py-1"><i class="fa-solid fa-hourglass-half mr-2"></i> Request Sent</span>
               <% elsif friendship_status == 'pending_incoming' %>
-                <%= button_to '<i class="fa-solid fa-check"></i> Accept Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: user)), method: :patch, class: "button" %>
+                <%= button_to '<i class="fa-solid fa-check mr-2"></i> Accept Request'.html_safe, friendship_path(current_user.inverse_friendships.find_by(user: user)), method: :patch, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 py-1" %>
               <% elsif friendship_status == 'friends' %>
-                <span class="button button-secondary"><i class="fa-solid fa-user-group"></i> Friends</span>
+                <span class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground h-9 px-3 py-1"><i class="fa-solid fa-user-group mr-2"></i> Friends</span>
               <% end %>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <p class="card-paragraph">No users found matching your search criteria.</p>
+      <p class="text-center text-muted-foreground text-lg">No users found matching your search criteria.</p>
     <% end %>
   <% else %>
-    <p class="card-paragraph">Enter a name or username to find new users.</p>
+    <p class="text-center text-muted-foreground text-lg">Enter a name or username to find new users.</p>
   <% end %>
 </div>

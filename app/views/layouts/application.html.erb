@@ -20,6 +20,7 @@
     <%# Google Fonts Preconnect %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
     <%# Font Awesome CDN %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -30,69 +31,69 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="app-body" data-action="click@window->dropdown#hide"> <%# Added data-action here %>
-    <div class="app-container" data-controller="sidebar">
-      <%= render 'shared/navbar' %> <%# Moved navbar outside main-layout-content %>
-      <div class="sidebar" data-sidebar-target="sidebar">
-        <div class="sidebar-header">
-          <%# Removed logo from sidebar as it's now in the main header %>
-          <button class="sidebar-close-button" data-action="sidebar#toggle">X</button>
+  <body class="font-sans antialiased bg-background text-foreground min-h-screen" data-action="click@window->dropdown#hide">
+    <div class="flex min-h-screen relative overflow-x-hidden" data-controller="sidebar">
+      <%= render 'shared/navbar' %>
+      <div class="fixed top-0 left-0 h-full w-64 bg-card border-r border-border z-40 transition-transform duration-300 ease-in-out p-4 flex flex-col lg:translate-x-0" data-sidebar-target="sidebar">
+        <div class="flex justify-end items-center mb-8 lg:hidden">
+          <button class="text-foreground text-2xl p-1 block" data-action="sidebar#toggle">
+            <i class="fa-solid fa-times"></i>
+          </button>
         </div>
-        <nav class="sidebar-nav">
-          <ul>
+        <nav class="flex-grow">
+          <ul class="list-none m-0 p-0">
             <% if logged_in? %>
-              <li>
-                <%= link_to root_path do %>
-                  <i class="fa-solid fa-house"></i> Home
+              <li class="mb-4">
+                <%= link_to root_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-house mr-3"></i> Home
                 <% end %>
               </li>
-              <li>
-                <%= link_to explore_users_path do %>
-                  <i class="fa-solid fa-magnifying-glass"></i> Explore
+              <li class="mb-4">
+                <%= link_to explore_users_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-magnifying-glass mr-3"></i> Explore
                 <% end %>
               </li>
-              <li>
-                <%= link_to friend_requests_path do %>
-                  <i class="fa-solid fa-user-plus"></i> Requests
+              <li class="mb-4">
+                <%= link_to friend_requests_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-user-plus mr-3"></i> Requests
                 <% end %>
               </li>
-              <li>
-                <%= link_to messages_path do %>
-                  <i class="fa-solid fa-envelope"></i> Messages
+              <li class="mb-4">
+                <%= link_to messages_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-envelope mr-3"></i> Messages
                 <% end %>
               </li>
-              <li>
-                <%= link_to friends_path do %>
-                  <i class="fa-solid fa-user-group"></i> Friends
+              <li class="mb-4">
+                <%= link_to friends_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-user-group mr-3"></i> Friends
                 <% end %>
               </li>
-              <li>
-                <%= link_to communities_path do %>
-                  <i class="fa-solid fa-users"></i> Communities
+              <li class="mb-4">
+                <%= link_to communities_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-users mr-3"></i> Communities
                 <% end %>
               </li>
-              <li>
-                <%= link_to blogs_path do %>
-                  <i class="fa-solid fa-blog"></i> Blogs
+              <li class="mb-4">
+                <%= link_to blogs_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-blog mr-3"></i> Blogs
                 <% end %>
               </li>
-              <%# "Create Post", "Profile", and "Logout" moved to top bar %>
             <% else %>
-              <li>
-                <%= link_to login_path do %>
-                  <i class="fa-solid fa-right-to-bracket"></i> Login
+              <li class="mb-4">
+                <%= link_to login_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                  <i class="fa-solid fa-right-to-bracket mr-3"></i> Login
                 <% end %>
               </li>
-              <li>
-                <%= link_to signup_path, class: "button" do %>
-                  <i class="fa-solid fa-user-plus"></i> Sign Up
+              <li class="mb-4">
+                <%= link_to signup_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" do %>
+                  <i class="fa-solid fa-user-plus mr-2"></i> Sign Up
                 <% end %>
               </li>
             <% end %>
           </ul>
         </nav>
       </div>
-      <div class="main-layout-content" data-sidebar-target="mainContent">
+      <div class="flex-1 pt-14 lg:ml-64 w-full transition-[margin-left,width] duration-300 ease-in-out" data-sidebar-target="mainContent">
         <%= yield %>
       </div>
     </div>

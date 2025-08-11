@@ -1,43 +1,43 @@
-<div class="container">
-  <h1 class="card-title">Friend Requests</h1>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center text-foreground mb-8">Friend Requests</h1>
 
-  <div class="card">
-    <h2>Incoming Requests</h2>
+  <div class="bg-card text-card-foreground p-8 rounded-lg shadow-md mb-6">
+    <h2 class="text-2xl font-semibold text-foreground mb-4 border-b border-border pb-3">Incoming Requests</h2>
     <% if @incoming_requests.any? %>
-      <div class="friend-requests-list">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         <% @incoming_requests.each do |friendship| %>
-          <div class="friend-card">
-            <%= image_tag friendship.user.avatar, alt: friendship.user.username, class: "avatar" %>
-            <%= link_to friendship.user.username, user_path(friendship.user), class: "username" %>
-            <div class="friend-actions">
-              <%= button_to '<i class="fa-solid fa-check"></i> Accept'.html_safe, friendship_path(friendship), method: :patch, class: "button" %>
-              <%= button_to '<i class="fa-solid fa-trash"></i> Decline'.html_safe, friendship_path(friendship), method: :delete, data: { confirm: "Are you sure you want to decline this request?" }, class: "button button-danger" %>
+          <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
+            <%= image_tag friendship.user.avatar, alt: friendship.user.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary" %>
+            <%= link_to friendship.user.username, user_path(friendship.user), class: "text-lg font-semibold text-foreground hover:underline mb-4" %>
+            <div class="flex flex-wrap justify-center gap-2">
+              <%= button_to '<i class="fa-solid fa-check mr-2"></i> Accept'.html_safe, friendship_path(friendship), method: :patch, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 py-1" %>
+              <%= button_to '<i class="fa-solid fa-trash mr-2"></i> Decline'.html_safe, friendship_path(friendship), method: :delete, data: { confirm: "Are you sure you want to decline this request?" }, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3 py-1" %>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <p class="card-paragraph">No incoming friend requests.</p>
+      <p class="text-center text-muted-foreground text-base">No incoming friend requests.</p>
     <% end %>
   </div>
 
-  <div class="card">
-    <h2>Outgoing Requests</h2>
+  <div class="bg-card text-card-foreground p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-foreground mb-4 border-b border-border pb-3">Outgoing Requests</h2>
     <% if @outgoing_requests.any? %>
-      <div class="friend-requests-list">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         <% @outgoing_requests.each do |friendship| %>
-          <div class="friend-card">
-            <%= image_tag friendship.friend.avatar, alt: friendship.friend.username, class: "avatar" %>
-            <%= link_to friendship.friend.username, user_path(friendship.friend), class: "username" %>
-            <div class="friend-actions">
-              <span class="button button-secondary"><i class="fa-solid fa-hourglass-half"></i> Pending</span>
-              <%= button_to '<i class="fa-solid fa-trash"></i> Cancel Request'.html_safe, friendship_path(friendship), method: :delete, data: { confirm: "Are you sure you want to cancel this request?" }, class: "button button-danger" %>
+          <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
+            <%= image_tag friendship.friend.avatar, alt: friendship.friend.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary" %>
+            <%= link_to friendship.friend.username, user_path(friendship.friend), class: "text-lg font-semibold text-foreground hover:underline mb-4" %>
+            <div class="flex flex-wrap justify-center gap-2">
+              <span class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground h-9 px-3 py-1"><i class="fa-solid fa-hourglass-half mr-2"></i> Pending</span>
+              <%= button_to '<i class="fa-solid fa-trash mr-2"></i> Cancel Request'.html_safe, friendship_path(friendship), method: :delete, data: { confirm: "Are you sure you want to cancel this request?" }, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3 py-1" %>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <p class="card-paragraph">No outgoing friend requests.</p>
+      <p class="text-center text-muted-foreground text-base">No outgoing friend requests.</p>
     <% end %>
   </div>
 </div>

@@ -1,46 +1,47 @@
-<header class="main-header">
-  <button class="sidebar-toggle-button" data-action="sidebar#toggle">☰</button>
-  <%= link_to root_path, class: "logo" do %>
-    <i class="fa-solid fa-user-group"></i> The FriendZone
+<header class="fixed top-0 left-0 lg:left-64 z-50 w-full lg:w-[calc(100%-16rem)] border-b border-border bg-card text-card-foreground px-4 py-2 flex items-center justify-between shadow-sm transition-[width,left] duration-300 ease-in-out">
+  <button class="text-foreground text-2xl mr-4 lg:hidden" data-action="sidebar#toggle">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+  <%= link_to root_path, class: "flex items-center text-primary font-bold text-xl tracking-tight font-poppins" do %>
+    <i class="fa-solid fa-user-group mr-2"></i> The FriendZone
   <% end %>
-  <nav>
-    <ul>
+  <nav class="hidden md:block">
+    <ul class="list-none m-0 p-0 flex items-center">
       <% if logged_in? %>
-        <%# Home, Requests, Messages, Friends, Settings moved to sidebar %>
-        <li>
-          <%= link_to explore_users_path do %>
-            <i class="fa-solid fa-magnifying-glass"></i> Explore
+        <li class="ml-5">
+          <%= link_to explore_users_path, class: "flex items-center text-foreground font-semibold transition-colors hover:text-primary" do %>
+            <i class="fa-solid fa-magnifying-glass mr-2"></i> Explore
           <% end %>
         </li>
-        <li>
-          <%= link_to new_post_path do %>
-            <i class="fa-solid fa-plus"></i> Create Post
+        <li class="ml-5">
+          <%= link_to new_post_path, class: "flex items-center text-foreground font-semibold transition-colors hover:text-primary" do %>
+            <i class="fa-solid fa-plus mr-2"></i> Create Post
           <% end %>
         </li>
-        <li class="profile-dropdown" data-controller="dropdown">
-          <a href="#" class="profile-dropdown-toggle" data-action="click->dropdown#toggle">
-            <%= image_tag current_user_avatar, alt: current_user.username %>
+        <li class="ml-5 relative" data-controller="dropdown">
+          <a href="#" class="flex items-center text-foreground font-semibold transition-colors hover:text-primary cursor-pointer" data-action="click->dropdown#toggle">
+            <%= image_tag current_user_avatar, alt: current_user.username, class: "h-8 w-8 rounded-full object-cover mr-2 border-2 border-primary" %>
             <%= current_user.username %>
-            <i class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-caret-down ml-1 transition-transform duration-300" data-dropdown-target="arrow"></i>
           </a>
-          <div class="profile-dropdown-menu" data-dropdown-target="menu">
-            <%= link_to user_path(current_user), class: "dropdown-item" do %>
-              <i class="fa-solid fa-user"></i> Profile Page
+          <div class="absolute top-full right-0 mt-3 bg-card border border-border rounded-lg shadow-lg min-w-[180px] py-2 z-50 opacity-0 invisible translate-y-[-10px] transition-all duration-200" data-dropdown-target="menu">
+            <%= link_to user_path(current_user), class: "flex items-center px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors" do %>
+              <i class="fa-solid fa-user mr-3"></i> Profile Page
             <% end %>
-            <%= button_to logout_path, method: :delete, class: "dropdown-item" do %>
-              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            <%= button_to logout_path, method: :delete, class: "flex items-center w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors" do %>
+              <i class="fa-solid fa-right-from-bracket mr-3"></i> Logout
             <% end %>
           </div>
         </li>
       <% else %>
-        <li>
-          <%= link_to login_path do %>
-            <i class="fa-solid fa-right-to-bracket"></i> Login
+        <li class="ml-5">
+          <%= link_to login_path, class: "flex items-center text-foreground font-semibold transition-colors hover:text-primary" do %>
+            <i class="fa-solid fa-right-to-bracket mr-2"></i> Login
           <% end %>
         </li>
-        <li>
-          <%= link_to signup_path, class: "button" do %>
-            <i class="fa-solid fa-user-plus"></i> Sign Up
+        <li class="ml-5">
+          <%= link_to signup_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 py-1" do %>
+            <i class="fa-solid fa-user-plus mr-2"></i> Sign Up
           <% end %>
         </li>
       <% end %>
