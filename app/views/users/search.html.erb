@@ -19,7 +19,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <% @users.each do |user| %>
           <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
-            <%= image_tag user.avatar, alt: user.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary" %>
+            <%= image_tag user.avatar, alt: user.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary min-h-[80px] bg-muted animate-pulse", loading: "lazy" %>
             <%= link_to user.username, user_path(user), class: "text-lg font-semibold text-foreground hover:underline mb-4" %>
             <div class="flex flex-wrap justify-center gap-2">
               <%= link_to user_path(user), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-3 py-1" do %>

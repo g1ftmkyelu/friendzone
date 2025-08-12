@@ -1,6 +1,6 @@
 <div class="bg-card text-card-foreground rounded-lg shadow-md p-6">
   <div class="flex items-center mb-4">
-    <%= image_tag post.user.avatar, alt: post.user.username, class: "h-12 w-12 rounded-full object-cover mr-3" %>
+    <%= image_tag post.user.avatar, alt: post.user.username, class: "h-12 w-12 rounded-full object-cover mr-3 min-h-[48px] bg-muted animate-pulse", loading: "lazy" %>
     <div>
       <%= link_to post.user.username, user_path(post.user), class: "font-semibold text-primary hover:underline text-base" %>
       <br>
@@ -13,7 +13,7 @@
       <p class="text-base text-foreground leading-relaxed mb-4"><%= post.content %></p>
     <% end %>
     <% if post.image_url.present? %>
-      <%= image_tag post.image_url, alt: "Post image", class: "max-w-full h-auto rounded-lg block mt-4" %>
+      <%= image_tag post.image_url, alt: "Post image", class: "max-w-full h-auto rounded-lg block mt-4 aspect-video bg-muted animate-pulse", loading: "lazy" %>
     <% end %>
   </div>
 

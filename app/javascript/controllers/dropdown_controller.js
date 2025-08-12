@@ -9,7 +9,8 @@ export default class extends Controller {
   }
 
   toggle(event) {
-    // Stop the click event from propagating up to the window, which would trigger the hide action immediately.
+    // Prevent the default link behavior (adding # to URL) and stop event propagation.
+    event.preventDefault();
     event.stopPropagation();
     // Toggle the 'open' class on the parent element (data-controller="dropdown")
     this.element.classList.toggle("open");
