@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hotwire/Stimulus related styles for interactivity */
+
+/* Dropdown menu visibility */
+/* When the element with data-controller="dropdown" has the 'open' class, */
+/* make its child element with data-dropdown-target="menu" visible. */
+[data-controller="dropdown"].open [data-dropdown-target="menu"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Sidebar open/close state for small screens (up to lg breakpoint) */
+/* Tailwind's lg: classes handle the large screen behavior directly in HTML. */
+@media (max-width: 1023px) { /* Applies to screens smaller than 'lg' breakpoint */
+  /* When the element with data-controller="sidebar" has the 'sidebar-open' class, */
+  /* make its child element with data-sidebar-target="sidebar" visible. */
+  [data-controller="sidebar"].sidebar-open [data-sidebar-target="sidebar"] {
+    transform: translateX(0);
+  }
+
+  /* When the element with data-controller="sidebar" has the 'sidebar-open' class, */
+  /* adjust the margin and width of its child element with data-sidebar-target="mainContent". */
+  [data-controller="sidebar"].sidebar-open [data-sidebar-target="mainContent"] {
+    margin-left: 16rem; /* Matches the w-64 of the sidebar */
+    width: calc(100% - 16rem);
+  }
+}
