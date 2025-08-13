@@ -10,11 +10,11 @@ module.exports = {
       colors: {
         border: "hsl(214.3 31.8% 88%)", // Slightly darker zinc-200
         input: "hsl(214.3 31.8% 88%)", // Slightly darker zinc-200
-        ring: "hsl(145 63.9% 49.2%)", // emerald-500
+        ring: "hsl(30 85% 31%)", // Dark amber
         background: "hsl(220 10% 95%)", // Very light grey
         foreground: "hsl(222.2 47.4% 11.2%)", // zinc-900
         primary: {
-          DEFAULT: "hsl(145 63.9% 49.2%)", // emerald-500 (#2ecc71)
+          DEFAULT: "hsl(30 85% 31%)", // Dark amber
           foreground: "hsl(0 0% 100%)", // white
         },
         secondary: {
