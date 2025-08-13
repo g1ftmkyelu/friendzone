@@ -38,7 +38,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           <% @memberships.each do |membership| %>
             <div class="flex flex-col items-center text-center">
-              <%= image_tag membership.user.avatar, alt: membership.user.username, class: "h-16 w-16 rounded-full object-cover mb-2 min-h-[64px] bg-muted animate-pulse", loading: "lazy" %>
+              <%= image_tag membership.user.avatar, alt: membership.user.username, class: "h-16 w-16 rounded-full object-cover mb-2 min-h-[64px] bg-muted", loading: "lazy" %>
               <%= link_to membership.user.username, user_path(membership.user), class: "font-semibold text-sm text-foreground hover:underline" %>
               <% if logged_in? && @community.creator == current_user && membership.user != current_user %>
                 <%= button_to "Remove", community_community_membership_path(@community, membership), method: :delete, data: { confirm: "Are you sure you want to remove #{membership.user.username} from this community?" }, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-7 px-2 py-1 mt-2" %>

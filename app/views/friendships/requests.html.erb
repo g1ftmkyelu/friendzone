@@ -7,7 +7,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         <% @incoming_requests.each do |friendship| %>
           <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
-            <%= image_tag friendship.user.avatar, alt: friendship.user.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary min-h-[80px] bg-muted animate-pulse", loading: "lazy" %>
+            <%= image_tag friendship.user.avatar, alt: friendship.user.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary min-h-[80px] bg-muted", loading: "lazy" %>
             <%= link_to friendship.user.username, user_path(friendship.user), class: "text-lg font-semibold text-foreground hover:underline mb-4" %>
             <div class="flex flex-wrap justify-center gap-2">
               <%= button_to '<i class="fa-solid fa-check mr-2"></i> Accept'.html_safe, friendship_path(friendship), method: :patch, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 py-1" %>
@@ -27,7 +27,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         <% @outgoing_requests.each do |friendship| %>
           <div class="bg-card text-card-foreground rounded-lg shadow-sm p-6 flex flex-col items-center text-center">
-            <%= image_tag friendship.friend.avatar, alt: friendship.friend.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary min-h-[80px] bg-muted animate-pulse", loading: "lazy" %>
+            <%= image_tag friendship.friend.avatar, alt: friendship.friend.username, class: "h-20 w-20 rounded-full object-cover mb-4 border-2 border-primary min-h-[80px] bg-muted", loading: "lazy" %>
             <%= link_to friendship.friend.username, user_path(friendship.friend), class: "text-lg font-semibold text-foreground hover:underline mb-4" %>
             <div class="flex flex-wrap justify-center gap-2">
               <span class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground h-9 px-3 py-1"><i class="fa-solid fa-hourglass-half mr-2"></i> Pending</span>

@@ -20,7 +20,7 @@
         </li>
         <li class="ml-5 relative" data-controller="dropdown">
           <a href="javascript:void(0)" class="flex items-center text-foreground font-semibold transition-colors hover:text-primary cursor-pointer" data-action="click->dropdown#toggle">
-            <%= image_tag current_user_avatar, alt: current_user.username, class: "h-8 w-8 rounded-full object-cover mr-2 border-2 border-primary min-h-[32px] bg-muted animate-pulse", loading: "lazy" %>
+            <%= image_tag current_user_avatar, alt: current_user.username, class: "h-8 w-8 rounded-full object-cover mr-2 border-2 border-primary min-h-[32px] bg-muted", loading: "lazy" %>
             <%= current_user.username %>
             <i class="fa-solid fa-caret-down ml-1 transition-transform duration-300" data-dropdown-target="arrow"></i>
           </a>

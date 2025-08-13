@@ -1,5 +1,5 @@
 <div class="flex items-start mb-4 pb-4 border-b border-border last:border-b-0 last:pb-0">
-  <%= image_tag comment.user.avatar, alt: comment.user.username, class: "h-10 w-10 rounded-full object-cover mr-3 flex-shrink-0 min-h-[40px] bg-muted animate-pulse", loading: "lazy" %>
+  <%= image_tag comment.user.avatar, alt: comment.user.username, class: "h-10 w-10 rounded-full object-cover mr-3 flex-shrink-0 min-h-[40px] bg-muted", loading: "lazy" %>
   <div class="flex-grow">
     <p class="text-sm leading-tight">
       <%= link_to comment.user.username, user_path(comment.user), class: "font-semibold text-primary hover:underline mr-1" %>

@@ -7,7 +7,7 @@
   <% end %>
 
   <div class="bg-card text-card-foreground rounded-lg shadow-md p-8 text-center mb-6">
-    <%= image_tag @user.avatar, alt: @user.username, class: "h-36 w-36 rounded-full object-cover mx-auto mb-6 border-4 border-primary min-h-[144px] bg-muted animate-pulse", loading: "lazy" %>
+    <%= image_tag @user.avatar, alt: @user.username, class: "h-36 w-36 rounded-full object-cover mx-auto mb-6 border-4 border-primary min-h-[144px] bg-muted", loading: "lazy" %>
     <h1 class="text-4xl font-bold text-foreground mb-2"><%= @user.username %></h1>
     <p class="text-lg text-muted-foreground mb-4"><%= @user.name %></p>
     <% if @user.bio.present? %>
