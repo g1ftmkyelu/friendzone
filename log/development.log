@@ -22363,3 +22363,633 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 266ms (Views: 230.8ms | ActiveRecord: 10.8ms (96 queries, 0 cached) | GC: 76.3ms)
 
 
+Started GET "/" for 127.0.0.1 at 2025-08-12 08:49:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mFriendship Pluck (0.1ms)[0m  [1m[34mSELECT "friendships"."friend_id" FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:55:in `all_friends'
+  [1m[36mFriendship Pluck (0.1ms)[0m  [1m[34mSELECT "friendships"."user_id" FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:58:in `all_friends'
+  [1m[36mUser Pluck (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE "users"."id" IN (18, 12, 17) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:73:in `recommended_users'
+  [1m[36mFriendship Pluck (0.1ms)[0m  [1m[34mSELECT "friendships"."friend_id" FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."status" = 'pending' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:74:in `recommended_users'
+  [1m[36mFriendship Pluck (0.1ms)[0m  [1m[34mSELECT "friendships"."user_id" FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."status" = 'pending' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:75:in `recommended_users'
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 4.9ms | GC: 0.3ms)
+  [1m[36mPost Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:17
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (18, 13, 12, 16, 15, 14, 17, 19) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" IN (40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" IN (40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 40 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 40 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 40 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 17.6ms | GC: 0.4ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 39 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 39 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 39 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 21.3ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 38 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 38 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 38 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 16.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 37 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 37 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = 37 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 37 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 32.6ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 36 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 36 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 36 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 3.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 35 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 35 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 35 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 5.8ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 34 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 34 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 34 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 33 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 33 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 33 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 2.8ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 32 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 32 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mLike Load (1.0ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = 32 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 32 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 19.5ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 31 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 31 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 31 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 16.5ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 30 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 30 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 30 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 29 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 29 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 29 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 10.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 28 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 28 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 28 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 10.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 27 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 27 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 27 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 18.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 26 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 26 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 26 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 17.0ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 25 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 25 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 25 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 3.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 24 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 24 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 24 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 15.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 23 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 23 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 23 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 22 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 22 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = 22 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 22 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 18.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 21 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 21 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 21 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.2ms | GC: 0.0ms)
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."id" NOT IN (14, 12, 17, 18) LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/_recommendation_panel.html.erb:3
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" NOT IN (14, 12, 17, 18) ORDER BY RANDOM() LIMIT 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/_recommendation_panel.html.erb:5
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 19 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 19 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 19 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 19 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 21 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 21 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 21 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 21 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 13 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 13 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 13 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 13 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 16 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 16 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 16 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 16 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 20 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 20 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 20 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 20 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  Rendered home/_recommendation_panel.html.erb (Duration: 68.0ms | GC: 0.0ms)
+  Rendered home/index.html.erb within layouts/application (Duration: 408.8ms | GC: 2.1ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 413.2ms | GC: 2.1ms)
+Completed 200 OK in 545ms (Views: 397.7ms | ActiveRecord: 20.5ms (96 queries, 0 cached) | GC: 9.3ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-08-12 08:49:40 +0200
+Started GET "/icon.svg" for 127.0.0.1 at 2025-08-12 08:49:40 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/icon.svg"):
+  
+Started GET "/explore" for 127.0.0.1 at 2025-08-12 08:50:01 +0200
+Processing by UsersController#search as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='search',application='FriendZone',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/search.html.erb within layouts/application
+  Rendered users/search.html.erb within layouts/application (Duration: 6.8ms | GC: 3.2ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | GC: 3.2ms)
+Completed 200 OK in 24ms (Views: 13.6ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 3.2ms)
+
+
+Started GET "/messages" for 127.0.0.1 at 2025-08-12 08:50:03 +0200
+Processing by MessagesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mMessage Pluck (8.4ms)[0m  [1m[34mSELECT "messages"."receiver_id" FROM "messages" WHERE "messages"."sender_id" = 14 /*action='index',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/messages_controller.rb:51:in `set_conversation_users_list'
+  [1m[36mMessage Pluck (0.1ms)[0m  [1m[34mSELECT "messages"."sender_id" FROM "messages" WHERE "messages"."receiver_id" = 14 /*action='index',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/messages_controller.rb:52:in `set_conversation_users_list'
+  Rendering layout layouts/application.html.erb
+  Rendering messages/index.html.erb within layouts/application
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."id" = 15 AND "users"."id" != 14 LIMIT 1 /*action='index',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/index.html.erb:7
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 15 AND "users"."id" != 14 ORDER BY "users"."username" ASC /*action='index',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/index.html.erb:9
+  Rendered messages/index.html.erb within layouts/application (Duration: 5.5ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | GC: 0.0ms)
+Completed 200 OK in 84ms (Views: 28.7ms | ActiveRecord: 9.1ms (5 queries, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/messages/15" for 127.0.0.1 at 2025-08-12 08:50:06 +0200
+Processing by MessagesController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 15 LIMIT 1 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/messages_controller.rb:46:in `set_conversation_user'
+  [1m[36mMessage Pluck (0.1ms)[0m  [1m[34mSELECT "messages"."receiver_id" FROM "messages" WHERE "messages"."sender_id" = 14 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/messages_controller.rb:51:in `set_conversation_users_list'
+  [1m[36mMessage Pluck (0.1ms)[0m  [1m[34mSELECT "messages"."sender_id" FROM "messages" WHERE "messages"."receiver_id" = 14 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/messages_controller.rb:52:in `set_conversation_users_list'
+  [1m[36mMessage Update All (0.3ms)[0m  [1m[33mUPDATE "messages" SET "read_at" = '2025-08-12 06:50:06.509945' WHERE ("messages"."id") IN (SELECT "messages"."id" FROM "messages" WHERE ((sender_id = 14 AND receiver_id = 15) OR (sender_id = 15 AND receiver_id = 14)) AND "messages"."receiver_id" = 14 AND "messages"."read_at" IS NULL ORDER BY "messages"."created_at" ASC) /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/controllers/messages_controller.rb:17:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering messages/show.html.erb within layouts/application
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."id" = 15 AND "users"."id" != 14 LIMIT 1 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/show.html.erb:7
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 15 AND "users"."id" != 14 ORDER BY "users"."username" ASC /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/show.html.erb:9
+  [1m[36mMessage Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "messages" WHERE ((sender_id = 14 AND receiver_id = 15) OR (sender_id = 15 AND receiver_id = 14)) LIMIT 1 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/show.html.erb:24
+  [1m[36mMessage Load (0.3ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE ((sender_id = 14 AND receiver_id = 15) OR (sender_id = 15 AND receiver_id = 14)) ORDER BY "messages"."created_at" ASC /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/show.html.erb:25
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='show',application='FriendZone',controller='messages'*/[0m
+  ↳ app/views/messages/_message.html.erb:1
+  Rendered messages/_message.html.erb (Duration: 8.4ms | GC: 0.0ms)
+  Rendered messages/show.html.erb within layouts/application (Duration: 27.6ms | GC: 0.3ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 29.3ms | GC: 0.3ms)
+Completed 200 OK in 74ms (Views: 29.3ms | ActiveRecord: 1.7ms (10 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/communities" for 127.0.0.1 at 2025-08-12 08:50:11 +0200
+Processing by CommunitiesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering communities/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mCommunity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "communities" LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/index.html.erb:12
+  [1m[36mCommunity Load (0.1ms)[0m  [1m[34mSELECT "communities".* FROM "communities" ORDER BY "communities"."created_at" DESC /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/index.html.erb:14
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 18 LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:4
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 5 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:5
+  Rendered communities/_community.html.erb (Duration: 43.6ms | GC: 0.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 16 LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:4
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 4 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:5
+  Rendered communities/_community.html.erb (Duration: 4.4ms | GC: 0.0ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 12 LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:4
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 3 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:5
+  Rendered communities/_community.html.erb (Duration: 3.6ms | GC: 0.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 13 LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:4
+  [1m[36mUser Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 2 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:5
+  Rendered communities/_community.html.erb (Duration: 3.8ms | GC: 0.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 21 LIMIT 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:4
+  [1m[36mUser Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 1 /*action='index',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/_community.html.erb:5
+  Rendered communities/_community.html.erb (Duration: 14.7ms | GC: 0.0ms)
+  Rendered communities/index.html.erb within layouts/application (Duration: 84.8ms | GC: 1.1ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 86.3ms | GC: 1.1ms)
+Completed 200 OK in 100ms (Views: 84.5ms | ActiveRecord: 2.6ms (13 queries, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/communities/5" for 127.0.0.1 at 2025-08-12 08:50:17 +0200
+Processing by CommunitiesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCommunity Load (0.1ms)[0m  [1m[34mSELECT "communities".* FROM "communities" WHERE "communities"."id" = 5 LIMIT 1 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/controllers/communities_controller.rb:52:in `set_community'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 5 AND "users"."id" = 14 LIMIT 1 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/controllers/communities_controller.rb:12:in `show'
+  [1m[36mCommunityMembership Load (0.1ms)[0m  [1m[34mSELECT "community_memberships".* FROM "community_memberships" WHERE "community_memberships"."user_id" = 14 AND "community_memberships"."community_id" = 5 LIMIT 1 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/models/user.rb:86:in `community_membership_status_with'
+  Rendering layout layouts/application.html.erb
+  Rendering communities/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 18 LIMIT 1 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/show.html.erb:11
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "community_memberships" ON "users"."id" = "community_memberships"."user_id" WHERE "community_memberships"."community_id" = 5 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/show.html.erb:12
+  [1m[36mCommunityMembership Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "community_memberships" WHERE "community_memberships"."community_id" = 5 AND "community_memberships"."status" = 'accepted' LIMIT 1 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/show.html.erb:35
+  [1m[36mCommunityMembership Load (0.1ms)[0m  [1m[34mSELECT "community_memberships".* FROM "community_memberships" WHERE "community_memberships"."community_id" = 5 AND "community_memberships"."status" = 'accepted' /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/show.html.erb:39
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 18 /*action='show',application='FriendZone',controller='communities'*/[0m
+  ↳ app/views/communities/show.html.erb:39
+  Rendered communities/show.html.erb within layouts/application (Duration: 14.6ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.1ms | GC: 0.0ms)
+Completed 200 OK in 71ms (Views: 16.9ms | ActiveRecord: 3.2ms (9 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-08-12 08:50:21 +0200
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  [1m[36mFriendship Pluck (0.2ms)[0m  [1m[34mSELECT "friendships"."friend_id" FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:55:in `all_friends'
+  [1m[36mFriendship Pluck (0.1ms)[0m  [1m[34mSELECT "friendships"."user_id" FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."status" = 'accepted' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:58:in `all_friends'
+  [1m[36mUser Pluck (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE "users"."id" IN (18, 12, 17) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:73:in `recommended_users'
+  [1m[36mFriendship Pluck (0.2ms)[0m  [1m[34mSELECT "friendships"."friend_id" FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."status" = 'pending' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:74:in `recommended_users'
+  [1m[36mFriendship Pluck (0.1ms)[0m  [1m[34mSELECT "friendships"."user_id" FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."status" = 'pending' /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:75:in `recommended_users'
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 7.3ms | GC: 0.0ms)
+  [1m[36mPost Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "posts" LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:17
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (18, 13, 12, 16, 15, 14, 17, 19) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mLike Load (0.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" IN (40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" IN (40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21) /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:18
+  [1m[36mLike Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 40 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 40 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 40 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 5.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 39 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 39 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 39 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 17.2ms | GC: 0.9ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 38 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 38 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 38 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 3.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 37 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 37 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = 37 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mComment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 37 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 20.8ms | GC: 0.9ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 36 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 36 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 36 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 35 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 35 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 35 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.6ms | GC: 0.8ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 34 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 34 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 34 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 16.4ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 33 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 33 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 33 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.8ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 32 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 32 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mLike Load (0.2ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = 32 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 32 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 5.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 31 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 31 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 31 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 20.0ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 30 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 30 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 30 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.1ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 29 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 29 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 29 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.2ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 28 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 28 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 28 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 3.5ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 27 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 27 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 27 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 3.6ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 26 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 26 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 26 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.2ms | GC: 0.5ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 25 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 25 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 25 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 2.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 24 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 24 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 24 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 3.7ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 23 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 23 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 23 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 2.9ms | GC: 0.0ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 22 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 22 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mLike Load (0.1ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."post_id" = 22 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:23
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 22 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 6.6ms | GC: 0.3ms)
+  [1m[36mLike Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "likes" WHERE "likes"."post_id" = 21 AND "likes"."user_id" = 14 LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:22
+  [1m[36mLike Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "likes" WHERE "likes"."post_id" = 21 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:25
+  [1m[36mComment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = 21 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/posts/_post.html.erb:31
+  Rendered posts/_post.html.erb (Duration: 4.1ms | GC: 0.3ms)
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."id" NOT IN (14, 12, 17, 18) LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/_recommendation_panel.html.erb:3
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" NOT IN (14, 12, 17, 18) ORDER BY RANDOM() LIMIT 5 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/views/home/_recommendation_panel.html.erb:5
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 19 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 19 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 19 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 19 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 20 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 20 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 20 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 20 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 13 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 13 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 13 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 13 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 16 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 16 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 16 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 16 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 15 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 15 AND "friendships"."status" = 'accepted' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:40:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."user_id" = 14 AND "friendships"."friend_id" = 15 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:43:in `friendship_status_with'
+  [1m[36mFriendship Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "friendships" WHERE "friendships"."friend_id" = 14 AND "friendships"."user_id" = 15 AND "friendships"."status" = 'pending' LIMIT 1 /*action='index',application='FriendZone',controller='home'*/[0m
+  ↳ app/models/user.rb:46:in `friendship_status_with'
+  Rendered home/_recommendation_panel.html.erb (Duration: 37.3ms | GC: 1.0ms)
+  Rendered home/index.html.erb within layouts/application (Duration: 230.2ms | GC: 16.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 231.3ms | GC: 16.0ms)
+Completed 200 OK in 268ms (Views: 222.5ms | ActiveRecord: 15.7ms (96 queries, 0 cached) | GC: 16.0ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2025-08-12 08:50:31 +0200
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='new',application='FriendZone',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 14.4ms | GC: 0.0ms)
+  Rendered posts/new.html.erb within layouts/application (Duration: 16.0ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.9ms | GC: 0.0ms)
+Completed 200 OK in 30ms (Views: 19.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-08-13 11:26:05 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='FriendZone'*/[0m
+Processing by HomeController#index as HTML
+Redirected to http://127.0.0.1:3131/login
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 50ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2025-08-13 11:26:05 +0200
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 24.4ms | GC: 0.0ms)
+  Rendered shared/_navbar.html.erb (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 52.9ms | GC: 0.0ms)
+Completed 200 OK in 92ms (Views: 61.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/icon.png" for 127.0.0.1 at 2025-08-13 11:26:07 +0200
+Started GET "/icon.svg" for 127.0.0.1 at 2025-08-13 11:26:07 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/icon.svg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  

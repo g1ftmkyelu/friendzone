@@ -33,69 +33,73 @@
 
   <body class="font-sans antialiased bg-background text-foreground min-h-screen" data-action="click@window->dropdown#hide">
     <div class="flex min-h-screen relative overflow-x-hidden" data-controller="sidebar">
-      <%= render 'shared/navbar' %>
+      <% unless @hide_layout_elements %>
+        <%= render 'shared/navbar' %>
+      <% end %>
       <%# Added -translate-x-full for default hidden state on small screens %>
-      <div class="fixed top-0 left-0 h-full w-64 bg-card border-r border-border z-40 transition-transform duration-300 ease-in-out p-4 flex flex-col -translate-x-full lg:translate-x-0" data-sidebar-target="sidebar">
-        <div class="flex justify-end items-center mb-8 lg:hidden">
-          <button class="text-foreground text-2xl p-1 block" data-action="sidebar#toggle">
-            <i class="fa-solid fa-times"></i>
-          </button>
+      <% unless @hide_layout_elements %>
+        <div class="fixed top-0 left-0 h-full w-64 bg-card border-r border-border z-40 transition-transform duration-300 ease-in-out p-4 flex flex-col -translate-x-full lg:translate-x-0" data-sidebar-target="sidebar">
+          <div class="flex justify-end items-center mb-8 lg:hidden">
+            <button class="text-foreground text-2xl p-1 block" data-action="sidebar#toggle">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <nav class="flex-grow">
+            <ul class="list-none m-0 p-0">
+              <% if logged_in? %>
+                <li class="mb-4">
+                  <%= link_to root_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-house mr-3"></i> Home
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to explore_users_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-magnifying-glass mr-3"></i> Explore
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to friend_requests_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-user-plus mr-3"></i> Requests
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to messages_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-envelope mr-3"></i> Messages
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to friends_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-user-group mr-3"></i> Friends
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to communities_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-users mr-3"></i> Communities
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to blogs_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-blog mr-3"></i> Blogs
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="mb-4">
+                  <%= link_to login_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
+                    <i class="fa-solid fa-right-to-bracket mr-3"></i> Login
+                  <% end %>
+                </li>
+                <li class="mb-4">
+                  <%= link_to signup_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" do %>
+                    <i class="fa-solid fa-user-plus mr-2"></i> Sign Up
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
         </div>
-        <nav class="flex-grow">
-          <ul class="list-none m-0 p-0">
-            <% if logged_in? %>
-              <li class="mb-4">
-                <%= link_to root_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-house mr-3"></i> Home
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to explore_users_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-magnifying-glass mr-3"></i> Explore
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to friend_requests_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-user-plus mr-3"></i> Requests
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to messages_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-envelope mr-3"></i> Messages
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to friends_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-user-group mr-3"></i> Friends
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to communities_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-users mr-3"></i> Communities
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to blogs_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-blog mr-3"></i> Blogs
-                <% end %>
-              </li>
-            <% else %>
-              <li class="mb-4">
-                <%= link_to login_path, class: "flex items-center text-foreground font-semibold p-2 rounded-md transition-colors hover:bg-muted" do %>
-                  <i class="fa-solid fa-right-to-bracket mr-3"></i> Login
-                <% end %>
-              </li>
-              <li class="mb-4">
-                <%= link_to signup_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full" do %>
-                  <i class="fa-solid fa-user-plus mr-2"></i> Sign Up
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </nav>
-      </div>
+      <% end %>
       <%# Added ml-0 for default no margin on small screens and lg:w-[calc(100%-16rem)] for correct width on large screens %>
-      <div class="flex-1 pt-14 ml-0 w-full transition-[margin-left,width] duration-300 ease-in-out lg:ml-64 lg:w-[calc(100%-16rem)]" data-sidebar-target="mainContent">
+      <div class="flex-1 w-full transition-[margin-left,width] duration-300 ease-in-out <%= @hide_layout_elements ? 'pt-0 ml-0' : 'pt-14 ml-0 lg:ml-64 lg:w-[calc(100%-16rem)]' %>" data-sidebar-target="mainContent">
         <%= yield %>
       </div>
     </div>

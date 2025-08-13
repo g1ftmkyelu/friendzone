@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :set_hide_layout_elements, only: [:new]
+
   def new
     # Render login form
   end
@@ -17,5 +19,11 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to login_path, notice: 'Logged out successfully!'
+  end
+
+  private
+
+  def set_hide_layout_elements
+    @hide_layout_elements = true
   end
 end

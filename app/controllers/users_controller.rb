@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:show, :edit, :update, :search] # Added :search
   before_action :set_user, only: [:show, :edit, :update]
   before_action :authorize_user!, only: [:edit, :update]
+  before_action :set_hide_layout_elements, only: [:new] # Added for signup page
 
   def new
     @user = User.new
@@ -68,5 +69,9 @@ class UsersController < ApplicationController
       flash[:alert] = 'You are not authorized to edit this profile.'
       redirect_to root_path
     end
+  end
+
+  def set_hide_layout_elements
+    @hide_layout_elements = true
   end
 end

@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
+  before_action :set_hide_layout_elements_default
+
   private
 
   def current_user
@@ -26,5 +28,9 @@ class ApplicationController < ActionController::Base
       flash[:alert] = 'You are not authorized to perform this action.'
       redirect_to root_path
     end
+  end
+
+  def set_hide_layout_elements_default
+    @hide_layout_elements = false
   end
 end
